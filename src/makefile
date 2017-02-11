@@ -1,6 +1,6 @@
-CC=g++ -std=c++11
+CC=g++
 CC_FLAGS=-Wall -ansi
-EXEC=rshell.out
+EXEC=test.out
 SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 
@@ -12,3 +12,4 @@ $(EXEC): $(OBJECTS)
 
 clean:
 	rm -f $(EXEC) $(OBJECTS)
+
