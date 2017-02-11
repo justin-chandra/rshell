@@ -1,4 +1,4 @@
-CC=g++
+CC=g++ -std=c++11
 CC_FLAGS=-Wall -ansi
 EXEC=rshell.out
 SOURCES=$(wildcard *.cpp)

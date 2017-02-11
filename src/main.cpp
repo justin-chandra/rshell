@@ -2,6 +2,8 @@
 #include <string>
 #include <unistd.h>
 #include <limits.h>
+#include <boost/tokenizer.hpp>
+
 
 using namespace std;
 
@@ -11,7 +13,7 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {	
-	Command * c = new Command("hi");
+	//Command * c = new Command("hi");
 
 	//gets username
 	char hostname[HOST_NAME_MAX];
@@ -24,6 +26,7 @@ int main(int argc, char * argv[])
 	do
 	{
 		cout << username << "@" << hostname << "$ ";
+		
 	} while (getline(cin, input));
 
 	return 0;
