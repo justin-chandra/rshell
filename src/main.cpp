@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
+#include <string.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
 #include <vector>
-#include <boost/tokenizer.hpp>
-
+#include <stack>
 
 using namespace std;
 
@@ -14,43 +15,38 @@ using namespace std;
 
 int main(int argc, char * argv[])
 {	
+	stack<char *> in;	
+
 	//gets username
 	char hostname[HOST_NAME_MAX];
 	char username[LOGIN_NAME_MAX];
 	gethostname(hostname, HOST_NAME_MAX);
 	getlogin_r(username, LOGIN_NAME_MAX);	
+	
 
-	//gets input
 	string input;
-
-	do
+	while (1 == 1)
 	{
 		cout << username << "@" << hostname << "$ ";
-		Command * c = new Command(input);
-		c->evaluate();
-		//delete c;
-	} while(getline(cin, input));
+		getline(cin, input);
+		
+		//converts to cstring
+		char * cstring = new char[input.size() + 1];
+		strcpy(cstring, input.c_str());
+		
+		char * parsed = strtok(cstring, " ");
+		in.push(parsed);
 
-	//old stuff below
-	//boost::char_separator<char> sep(" ");
-	//boost::tokenizer< boost::char_separator<char> > tok(input, sep);	
-	/*
-	   do
-	   {
+		while (parsed != NULL)
+		{
+			parsed = strtok(NULL, " ");
+			in.push(parsed);
+		}
 
-	   cout << username << "@" << hostname << "$ ";
-	   boost::char_separator<char> sep(" ");
-	   boost::tokenizer< boost::char_separator<char> > tok(input, sep);	
+		Command * c = new Command(parsed);	
 
-	//cout << username << "@" << hostname << "$ ";
-	for (boost::tokenizer< boost::char_separator<char> >::iterator beg = tok.begin(); 
-	beg != tok.end(); ++beg)
-	{
-	cout << *beg << endl;
+		delete [] cstring;
 	}
-
-	} while (getline(cin, input));
-	*/
 
 	return 0;
 }

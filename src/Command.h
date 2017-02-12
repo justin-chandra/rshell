@@ -23,17 +23,14 @@ class Command: public Rshell
 		stack<char *> commands;
 		stack<char *> temp;
 		char * command;
-		vector<char *> args;
+		char * args[1000];
 
 		Command();
-		Command(string s);
-		Command(char * argument);
+		Command(char * c);
 		~Command();
-		void build(string input);
 		bool evaluate();
 
 		//test stuff
-		void stack_print(stack<char*>s);
 	private:
 };
 
