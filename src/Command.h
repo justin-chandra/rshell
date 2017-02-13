@@ -27,9 +27,10 @@ class Command: public Rshell
 		stack<char *> temp;
 		char * command;
 		char * args[100];
+		vector<char *> v;
 
 		Command();
-		Command(stack<char*>s);
+		Command(stack<char *>s);
 		Command(char * temp);
 		~Command();
 		bool evaluate();

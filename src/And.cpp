@@ -4,6 +4,12 @@ using namespace std;
 
 #include "And.h"
 
+And::And(Rshell * f, Rshell * s)
+{
+	this->first = f;
+	this->second = s;
+}
+
 And::And()
 {
 

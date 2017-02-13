@@ -16,25 +16,14 @@ Command::Command()
 
 }
 
-Command::Command(stack<char*> s)
+Command::Command(stack<char *> s)
 {
-	unsigned i = 0;
-	while(!s.empty())
+	while (!s.empty())
 	{
-		//args[i] = s.top();
-		//s.pop();	
-		char * temp = s.top();
-		args[i] = temp;
-		++i;
-		//cout << s.top() << endl;
+		v.push_back(s.top());
 		s.pop();
 	}
-	/*
-	for (unsigned j = 0; j < 100; ++j)
-	{
-		cout << args[j] << endl;
-	}
-	*/
+	v.push_back('\0');
 }
 
 Command::Command(char * temp)
@@ -64,8 +53,8 @@ bool Command::evaluate()
 	}
 	else if (child_pid == 0)
 	{
-		//cout << args[1] << endl;
-		if (execvp(args[0], args) == -1)
+		char ** vloc = &v[0];
+		if (execvp(v.at(0), vloc) == -1)
 		{
 			cout << "execvp in bool Command::evaluate() failed" << endl;
 			return -1;

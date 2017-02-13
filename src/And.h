@@ -10,6 +10,7 @@ using namespace std;
 class And: public Connector
 {
 	public:
+		And(Rshell *, Rshell*);
 		And();
 		~And();
 		Rshell * first;

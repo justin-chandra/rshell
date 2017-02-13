@@ -39,13 +39,22 @@ int main(int argc, char * argv[])
 		strcpy(cstring, input.c_str());
 
 		char * parsed = strtok(cstring, " ");
+		string exit = "exit";
 		if (parsed != NULL)
 		{
+			if (parsed == exit)
+			{
+				return 0;
+			}
 			in.push(parsed);
 		}
 		while (parsed != NULL)
 		{
 			parsed = strtok(NULL, " ");
+			if (parsed == exit)
+			{
+				return 0;
+			}
 			if (parsed != NULL)
 			{
 				in.push(parsed);
@@ -80,7 +89,7 @@ void build(stack<char*> & in)
 		if (temp == and_string)
 		{
 			//put other stack into char* []?
-
+			Rshell * conn = new And();
 		}
 		else if (temp == or_string)
 		{
@@ -100,7 +109,7 @@ void build(stack<char*> & in)
 	//and pass it into the command constructor
 	if (!temp_stack.empty())
 	{
-		char * test1 = combine(temp_stack);
+		//char * test1 = combine(temp_stack);
 		//Rshell * test = new Command(test1);
 		Rshell * test = new Command(temp_stack);
 		test->evaluate();
