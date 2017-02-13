@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <stack>
-#include <boost/tokenizer.hpp>
 #include <sys/wait.h>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -15,12 +16,36 @@ Command::Command()
 
 }
 
+Command::Command(stack<char*> s)
+{
+	unsigned i = 0;
+	while(!s.empty())
+	{
+		//args[i] = s.top();
+		//s.pop();	
+		char * temp = s.top();
+		args[i] = temp;
+		++i;
+		//cout << s.top() << endl;
+		s.pop();
+	}
+	/*
+	for (unsigned j = 0; j < 100; ++j)
+	{
+		cout << args[j] << endl;
+	}
+	*/
+}
+
 Command::Command(char * temp)
 {
-	char * a = "echo";
-	char * b = "hello";
-	args[0] = a;
-	args[1] = b;
+	/*
+	for (unsigned i = 0; temp[i] != '\0'; ++i)
+	{
+		args[i] = temp[i];
+	}
+	*/
+	args[0] = temp;
 }
 
 Command::~Command()
@@ -39,6 +64,7 @@ bool Command::evaluate()
 	}
 	else if (child_pid == 0)
 	{
+		//cout << args[1] << endl;
 		if (execvp(args[0], args) == -1)
 		{
 			cout << "execvp in bool Command::evaluate() failed" << endl;

@@ -68,8 +68,6 @@ void build(stack<char*> & in)
 	string always_string = ";";
 	string comment_string = "#";
 
-	char * command[100];
-
 	//pop until we get a connector
 	//put into temp stack
 	stack<char *> temp_stack;
@@ -102,9 +100,9 @@ void build(stack<char*> & in)
 	//and pass it into the command constructor
 	if (!temp_stack.empty())
 	{
-		//char * _c = combine(temp_stack);
-		char * q;
-		Rshell * test = new Command(q);
+		char * test1 = combine(temp_stack);
+		//Rshell * test = new Command(test1);
+		Rshell * test = new Command(temp_stack);
 		test->evaluate();
 	}
 }
@@ -113,15 +111,15 @@ char * combine(stack<char*> s)
 {
 	//try combining all the char * then making them into
 	//char * [] in the constructor, appears to work here
-	char * temp = NULL;
+		
+	char * temp = s.top();
+	s.pop();
 	while(!s.empty())
 	{
 		strcat(temp, s.top());
-		s.pop();
-		strcat(temp, " ");
+		s.pop();	
 	}
-	char * final = { temp };
-	return final;
+	return temp;
 }
 
 void stack_print(stack<char *> s)

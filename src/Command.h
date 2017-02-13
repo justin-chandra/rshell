@@ -1,6 +1,9 @@
 #include <iostream>
 #include <stack>
 #include <vector>
+#include <stdio.h>
+#include <sys/types.h>
+#include <stack>
 
 using namespace std;
 
@@ -23,9 +26,10 @@ class Command: public Rshell
 		stack<char *> commands;
 		stack<char *> temp;
 		char * command;
-		char * args[];
+		char * args[100];
 
 		Command();
+		Command(stack<char*>s);
 		Command(char * temp);
 		~Command();
 		bool evaluate();
