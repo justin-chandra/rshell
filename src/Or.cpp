@@ -18,7 +18,7 @@ bool Or::evaluate()
 {
 	if (first->evaluate() == false)
 	{
-		status == true;
+		status = true;
 		return true;
 	}
 	
