@@ -16,5 +16,6 @@ Connector::~Connector()
 
 bool Connector::evaluate()
 {
+	
 	return false;
 }
