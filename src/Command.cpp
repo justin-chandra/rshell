@@ -15,9 +15,12 @@ Command::Command()
 
 }
 
-Command::Command(char * c)
+Command::Command(char * temp)
 {
-	
+	char * a = "echo";
+	char * b = "hello";
+	args[0] = a;
+	args[1] = b;
 }
 
 Command::~Command()
