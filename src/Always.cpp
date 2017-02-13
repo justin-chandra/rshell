@@ -15,5 +15,5 @@ Always::~Always()
 
 bool Always::evaluate()
 {
-	return false;
+	return true;
 }
