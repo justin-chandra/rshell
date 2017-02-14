@@ -3,11 +3,18 @@
 using namespace std;
 
 #include "And.h"
+#include "Command.h"
 
 And::And(Rshell * f, Rshell * s)
 {
 	this->first = f;
 	this->second = s;
+}
+
+And::And(stack<char *> s)
+{
+	Command * c = new Command(s);
+	this->second = c;
 }
 
 And::And()

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stack>
+#include <string>
 
 using namespace std;
 
@@ -11,6 +13,7 @@ class And: public Connector
 {
 	public:
 		And(Rshell *, Rshell*);
+		And(stack<char *>s);
 		And();
 		~And();
 		Rshell * first;
