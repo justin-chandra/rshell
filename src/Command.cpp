@@ -8,7 +8,7 @@
 #include <stack>
 
 using namespace std;
-
+#include "Rshell.h"
 #include "Command.h"
 
 Command::Command()

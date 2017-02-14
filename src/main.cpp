@@ -11,6 +11,10 @@ using namespace std;
 
 #include "Rshell.h"
 #include "Connector.h"
+
+#include "And.h"
+#include "Or.h"
+#include "Always.h"
 #include "Command.h"
 
 void build(stack<char *> & in);
@@ -83,7 +87,7 @@ void build(stack<char*> & in)
 		if (temp == and_string)
 		{
 			//put other stack into char* []?
-			Rshell * conn = new And();
+			And * conn = new And();
 		}
 		else if (temp == or_string)
 		{
@@ -105,7 +109,7 @@ void build(stack<char*> & in)
 	{
 		//char * test1 = combine(temp_stack);
 		//Rshell * test = new Command(test1);
-		Rshell * test = new Command(temp_stack);
+		Command * test = new Command(temp_stack);
 		test->evaluate();
 	}
 }
