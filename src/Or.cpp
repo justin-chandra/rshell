@@ -1,8 +1,22 @@
 #include <iostream>
-
+//#include <stack>
+//
 using namespace std;
 
 #include "Or.h"
+#include "Command.h"
+
+Or::Or(Rshell * f, Rshell * s)
+{
+	this->first = f;
+	this->second = s;
+}
+
+Or::Or(stack<char *> s)
+{
+	Command *c = new Command(s);
+	this->second = c;
+}
 
 Or::Or()
 {

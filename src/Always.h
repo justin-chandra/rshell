@@ -3,6 +3,9 @@
 using namespace std;
 
 #include "Connector.h"
+#include <stack>
+#include <string>
+
 
 #ifndef Always_H
 #define Always_H
@@ -16,6 +19,7 @@ class Always: public Connector
 		bool status;
 		
 		Always();
+		Always(stack<char *> s);
 		~Always();
 		bool evaluate();
 	private:
