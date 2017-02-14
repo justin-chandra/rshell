@@ -51,17 +51,11 @@ int main(int argc, char * argv[])
 		while (parsed != NULL)
 		{
 			parsed = strtok(NULL, " ");
-			if (parsed == exit)
-			{
-				return 0;
-			}
 			if (parsed != NULL)
 			{
 				in.push(parsed);
 			}
 		}
-		//stack print for testing
-		//stack_print(in);
 		build(in);		
 
 		delete [] cstring;
