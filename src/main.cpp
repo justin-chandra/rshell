@@ -17,9 +17,10 @@ using namespace std;
 #include "Always.h"
 #include "Command.h"
 
-void build(stack<char *> & in);
+stack<Rshell *> build(stack<char *> & in);
 void stack_print(stack<char *> s);
 char * combine(stack<char *> s);
+Rshell * root(stack<Rshell *> & s);
 
 int main(int argc, char * argv[])
 {	
@@ -35,6 +36,7 @@ int main(int argc, char * argv[])
 	string input;
 	while (1 == 1)
 	{
+		stack<Rshell *> connectors;
 		cout << username << "@" << hostname << "$ ";
 		getline(cin, input);
 
@@ -43,6 +45,8 @@ int main(int argc, char * argv[])
 		strcpy(cstring, input.c_str());
 
 		char * parsed = strtok(cstring, " ");
+		//exit needs to be somewhere else where it can be caught
+		//during execution
 		string exit = "exit";
 		if (parsed != NULL)
 		{
@@ -57,10 +61,15 @@ int main(int argc, char * argv[])
 			parsed = strtok(NULL, " ");
 			if (parsed != NULL)
 			{
+				if (parsed == exit)
+				{
+					return 0;
+				}
+
 				in.push(parsed);
 			}
 		}
-		build(in);		
+		connectors = build(in);		
 
 		delete [] cstring;
 	}
@@ -68,8 +77,21 @@ int main(int argc, char * argv[])
 	return 0;
 }
 
-void build(stack<char*> & in)
+Rshell * buildTree(stack<Rshell *> & s)
 {
+	Rshell * root = NULL;
+	Rshell * temp = NULL;
+	while (!s.empty())
+	{
+		temp = s.top();
+			
+	}		
+}
+
+stack<Rshell *> build(stack<char*> & in)
+{
+	stack<Rshell *> c;
+
 	string and_string = "&&";
 	string or_string = "||";
 	string always_string = ";";
@@ -87,24 +109,29 @@ void build(stack<char*> & in)
 		if (temp == and_string)
 		{
 			//put other stack into char* []?
-			And * conn = new And();
+			Rshell * _and = new And(temp_stack);
+			c.push(_and);
 		}
 		else if (temp == or_string)
 		{
-
+			Rshell * _or = new Or(temp_stack);
+			c.push(_or);
 		}
 		else if (temp == always_string)
 		{
-
+			Rshell * _always = new Always(temp_stack);
+			c.push(_always);
 		}
 		else if (temp == comment_string)
 		{
-
+			//do something
+			cout << "break maybe?" << endl;
 		}
 	}
 	//no connectors
 	//need to combine the rest of the stuff for a command
 	//and pass it into the command constructor
+	/*
 	if (!temp_stack.empty())
 	{
 		//char * test1 = combine(temp_stack);
@@ -112,13 +139,15 @@ void build(stack<char*> & in)
 		Command * test = new Command(temp_stack);
 		test->evaluate();
 	}
+	*/
+	return c;
 }
 
 char * combine(stack<char*> s)
 {
 	//try combining all the char * then making them into
 	//char * [] in the constructor, appears to work here
-		
+
 	char * temp = s.top();
 	s.pop();
 	while(!s.empty())

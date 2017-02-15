@@ -18,11 +18,15 @@ class And: public Connector
 		~And();
 		Rshell * first;
 		Rshell * second;
+		Rshell * parent;
 		string userInput;
 		bool status;
 
 
 		bool evaluate();
+		void setParent(Rshell *);
+		void setFirst(Rshell *);
+		void setSecond(Rshell *);
 	private:
 };
 

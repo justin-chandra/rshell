@@ -14,10 +14,16 @@ class Connector: public Rshell
 	~Connector();
 	Rshell * first;
 	Rshell * second;
+	Rshell * parent;
 	string userInput;
 	bool status;
 
 	virtual bool evaluate();
+	virtual Rshell * getParent();
+	virtual void setParent(Rshell *);
+	virtual void setFirst(Rshell *);
+	virtual void setSecond(Rshell *);
+	
 	
 	private:
 };
