@@ -24,6 +24,12 @@ Command::Command(stack<char *> s)
 		s.pop();
 	}
 	v.push_back('\0');
+	cout << "Making: ";
+	for (unsigned i = 0; v[i] != '\0'; ++i)
+	{
+		cout << v[i];
+	}
+	cout << endl;
 }
 
 Command::Command(char * temp)
@@ -57,6 +63,7 @@ bool Command::evaluate()
 		if (execvp(v.at(0), vloc) == -1)
 		{
 			cout << "execvp in bool Command::evaluate() failed" << endl;
+			return false;
 			return -1;
 		}
 	}
@@ -64,8 +71,9 @@ bool Command::evaluate()
 	{
 		int status;
 		waitpid(child_pid, &status, 0);
+		return true;
 	}
-	return false;
+	return true;
 }
 
 

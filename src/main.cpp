@@ -20,7 +20,8 @@ using namespace std;
 stack<Rshell *> build(stack<char *> & in);
 void stack_print(stack<char *> s);
 char * combine(stack<char *> s);
-Rshell * root(stack<Rshell *> & s);
+Rshell * tree(stack<Rshell *> & s);
+void empty_stack(stack<char *> & s);
 
 int main(int argc, char * argv[])
 {	
@@ -70,22 +71,30 @@ int main(int argc, char * argv[])
 			}
 		}
 		connectors = build(in);		
-
+		Rshell * root = tree(connectors);
+		root->evaluate();
 		delete [] cstring;
 	}
 
 	return 0;
 }
 
-Rshell * buildTree(stack<Rshell *> & s)
+Rshell * tree(stack<Rshell *> & s)
 {
-	Rshell * root = NULL;
-	Rshell * temp = NULL;
+	Rshell * root = s.top();
+	Rshell * temp = s.top();
 	while (!s.empty())
 	{
 		temp = s.top();
-			
-	}		
+		if (!root)
+		{
+			root->setFirst(temp);
+			root = temp;
+		}
+		s.pop();
+	}
+	
+	return root;		
 }
 
 stack<Rshell *> build(stack<char*> & in)
@@ -111,36 +120,67 @@ stack<Rshell *> build(stack<char*> & in)
 			//put other stack into char* []?
 			Rshell * _and = new And(temp_stack);
 			c.push(_and);
+			empty_stack(temp_stack);
 		}
 		else if (temp == or_string)
 		{
 			Rshell * _or = new Or(temp_stack);
 			c.push(_or);
+			empty_stack(temp_stack);
 		}
 		else if (temp == always_string)
 		{
 			Rshell * _always = new Always(temp_stack);
 			c.push(_always);
+			empty_stack(temp_stack);
 		}
 		else if (temp == comment_string)
 		{
 			//do something
-			cout << "break maybe?" << endl;
+			cout << "early return" << endl;
+			return c;
 		}
+		//empty_stack(temp_stack);
 	}
 	//no connectors
 	//need to combine the rest of the stuff for a command
 	//and pass it into the command constructor
-	/*
 	if (!temp_stack.empty())
 	{
+		/*
 		//char * test1 = combine(temp_stack);
 		//Rshell * test = new Command(test1);
 		Command * test = new Command(temp_stack);
-		test->evaluate();
+		//test->evaluate();
+		Rshell * single = c.top();
+		c.pop();
+		single->setFirst(test);
+		c.push(single);
+		*/
+		if (c.empty())
+		{
+			//single command
+			Command * single_command = new Command(temp_stack);
+			c.push(single_command);
+		}
+		else 
+		{
+			Command * last_command = new Command(temp_stack);
+			Rshell * last_connector = c.top();
+			c.pop();
+			last_connector->setFirst(last_command);
+			c.push(last_connector);
+		}
 	}
-	*/
 	return c;
+}
+
+void empty_stack(stack<char *> & s)
+{
+	while(!s.empty())
+	{
+		s.pop();
+	}
 }
 
 char * combine(stack<char*> s)

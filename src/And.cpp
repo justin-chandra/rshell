@@ -31,11 +31,11 @@ bool And::evaluate()
 {
 	if (first->evaluate() == true)
 	{
+		
 		status = true;
 		return true;
 	}
-
-	else
+	else if (first->evaluate() == false)
 	{
 		status = false;
 		return false;

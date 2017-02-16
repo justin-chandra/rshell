@@ -21,6 +21,7 @@ class Command: public Rshell
 	public:
 		Rshell * first;
 		Rshell * second;
+		Rshell * parent;
 		string userInput;
 		bool status;
 		stack<char *> commands;
@@ -34,6 +35,13 @@ class Command: public Rshell
 		Command(char * temp);
 		~Command();
 		bool evaluate();
+
+		Rshell * getParent() { return NULL; }
+		
+		void setParent(Rshell *) {};
+		void setFirst(Rshell *) {};
+		void setSecond(Rshell *) {};
+		
 
 		//test stuff
 	private:
