@@ -110,11 +110,11 @@ Rshell * tree(stack<Rshell *> & s)
 */
 Rshell * tree(vector<Rshell *> & v)
 {
-	Rshell * root = v.at(0);
-	Rshell * temp = v.at(0);
-	for (unsigned i = 0; i < v.size(); ++i)
+	Rshell * root = v.at(v.size() - 1);
+	Rshell * temp = root;
+	while (v.size() > 0)
 	{
-		temp = v.at(0);
+		temp = v.at(v.size() - 1);
 		if (!root)
 		{
 			root->setFirst(temp);
@@ -147,6 +147,8 @@ vector<Rshell *> build(stack<char *> & in)
 			//put other stack into char* []?
 			temp_stack.pop();
 			Rshell * _and = new And(temp_stack);
+			cout << "Printing stack: ";
+			stack_print(temp_stack);
 			c.push_back(_and);
 			empty_stack(temp_stack);
 		}
@@ -185,7 +187,11 @@ vector<Rshell *> build(stack<char *> & in)
 		}
 		else if (!c.empty())
 		{
+			//this is supposed to be the last command 
+			//in echo a && echo b && ls
 			Command * last_command = new Command(temp_stack);
+			cout << "Printing stack: ";
+			stack_print(temp_stack);
 			c.at(c.size() - 1)->setFirst(last_command);
 		}
 	}
@@ -292,7 +298,7 @@ void stack_print(stack<char *> s)
 	while (s.size() > 0)
 	{
 		char * temp = s.top();
-		cout << temp[0];
+		cout << temp;
 		s.pop();
 	}
 	cout << endl;
