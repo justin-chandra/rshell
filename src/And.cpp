@@ -11,10 +11,24 @@ And::And(Rshell * f, Rshell * s)
 	this->second = s;
 }
 
+And::And(Rshell * r)
+{
+	this->first = r->first;
+	this->second = r->second;
+	this->parent = r->getParent();
+	this->status = r->status;
+}
+
 And::And(stack<char *> s)
 {
 	Command * c = new Command(s);
 	this->second = c;
+}
+
+And::And(queue<char *> q)
+{
+	Command * c = new Command(q);
+	this->first = c;
 }
 
 And::And()

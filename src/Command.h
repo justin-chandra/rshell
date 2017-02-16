@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -32,6 +33,7 @@ class Command: public Rshell
 
 		Command();
 		Command(stack<char *>s);
+		Command(queue<char *> q);
 		Command(char * temp);
 		~Command();
 		bool evaluate();

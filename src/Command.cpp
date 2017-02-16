@@ -6,14 +6,26 @@
 #include <sys/wait.h>
 #include <vector>
 #include <stack>
+#include <queue>
 
 using namespace std;
+
 #include "Rshell.h"
 #include "Command.h"
 
 Command::Command()
 {
 
+}
+
+Command::Command(queue<char *> q)
+{
+	while (!q.empty())
+	{
+		v.push_back(q.front());
+		q.pop();
+	}
+	v.push_back('\0');
 }
 
 Command::Command(stack<char *> s)

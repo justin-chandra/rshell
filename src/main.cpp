@@ -18,8 +18,8 @@ using namespace std;
 #include "Always.h"
 #include "Command.h"
 
-//stack<Rshell *> build(stack<char *> & in);
-queue<Rshell *> build(queue<char *> & in);
+stack<Rshell *> build(stack<char *> & in);
+//queue<Rshell *> build(queue<char *> & in);
 void stack_print(stack<char *> s);
 char * combine(stack<char *> s);
 Rshell * tree(stack<Rshell *> & s);
@@ -41,8 +41,8 @@ int main(int argc, char * argv[])
 	string input;
 	while (1 == 1)
 	{
-		//stack<Rshell *> connectors;
-		queue<Rshell *> connectors;
+		stack<Rshell *> connectors;
+		//queue<Rshell *> connectors;
 		cout << username << "@" << hostname << "$ ";
 		getline(cin, input);
 
@@ -60,8 +60,8 @@ int main(int argc, char * argv[])
 			{
 				return 0;
 			}
-			//in.push(parsed);
-			qin.push(parsed);
+			in.push(parsed);
+			//qin.push(parsed);
 		}
 		while (parsed != NULL)
 		{
@@ -73,13 +73,13 @@ int main(int argc, char * argv[])
 					return 0;
 				}
 
-				//in.push(parsed);
-				qin.push(parsed);
+				in.push(parsed);
+				//qin.push(parsed);
 			}
 		}
-		connectors = build(qin);		
-		//Rshell * root = tree(connectors);
-		//root->evaluate();
+		connectors = build(in);		
+		Rshell * root = tree(connectors);
+		root->evaluate();
 		delete [] cstring;
 	}
 
@@ -100,18 +100,75 @@ Rshell * tree(stack<Rshell *> & s)
 		}
 		s.pop();
 	}
-	
+
 	return root;		
 }
+/*
+   queue <Rshell *> build(queue<char*> & qin)
+   {
+   queue<Rshell *> c;
+   string and_string = "&&";
+   string or_string = "||";
+   string always_string = ";";
+   string comment_string = "#";
 
-queue <Rshell *> build(queue<char*> & qin)
+//pop until we get a connector
+//put into temp queue
+queue<char *> temp_queue;
+while (!qin.empty())
 {
-	queue<Rshell *> c;
-
-	return c;
+char * temp = qin.front();
+temp_queue.push(qin.front());
+qin.pop();
+//found a connector
+if (temp == and_string)
+{
+//put other stack into char* []?
+//Rshell * _and = new And(temp_queue);
+//c.push(_and);
+}
+else if (temp == or_string)
+{
+//Rshell * _or = new Or(temp_queue);
+//c.push(_or);
+}
+else if (temp == always_string)
+{
+//Rshell * _always = new Always(temp_queue);
+//c.push(_always);
+}
+else if (temp == comment_string)
+{
+//do something
+cout << "early return" << endl;
+return c;
+}
+//empty_stack(temp_stack);
+}
+//no connectors
+//need to combine the rest of the stuff for a command
+//and pass it into the command constructor
+if (!temp_queue.empty())
+{
+if (c.empty())
+{
+//single command
+//Command * single_command = new Command(temp_stack);
+//c.push(single_command);
+}
+else 
+{
+Command * last_command = new Command(temp_stack);
+Rshell * last_connector = c.top();
+c.pop();
+last_connector->setFirst(last_command);
+c.push(last_connector);
+}
 }
 
-/*
+return c;
+}
+*/
 stack<Rshell *> build(stack<char*> & in)
 {
 	stack<Rshell *> c;
@@ -168,18 +225,20 @@ stack<Rshell *> build(stack<char*> & in)
 			Command * single_command = new Command(temp_stack);
 			c.push(single_command);
 		}
-		else 
+		else if (!c.empty())
 		{
 			Command * last_command = new Command(temp_stack);
 			Rshell * last_connector = c.top();
+			//there is a segmentation fault when the 
+			//the pop statement below is executed
 			c.pop();
+			//cout << last_connector->evaluate() << endl;
 			last_connector->setFirst(last_command);
 			c.push(last_connector);
 		}
 	}
 	return c;
 }
-*/
 void empty_stack(stack<char *> & s)
 {
 	while(!s.empty())
