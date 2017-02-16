@@ -36,8 +36,7 @@ bool Or::evaluate()
 		status = true;
 		return true;
 	}
-	
-	else if (first->evaluate() == false)
+	else
 	{
 		status = false;
 		return false;

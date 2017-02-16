@@ -19,6 +19,7 @@ class And: public Connector
 		And(queue<char *> q);
 		And();
 		~And();
+
 		Rshell * first;
 		Rshell * second;
 		Rshell * parent;
