@@ -30,6 +30,8 @@ Always::~Always()
 
 bool Always::evaluate()
 {
+	first->evaluate();
+	second->evaluate();
 	return true;
 }
 

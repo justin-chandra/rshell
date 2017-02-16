@@ -32,11 +32,12 @@ bool Or::evaluate()
 {
 	if (first->evaluate() == false)
 	{
+		second->evaluate();
 		status = true;
 		return true;
 	}
 	
-	else
+	else if (first->evaluate() == false)
 	{
 		status = false;
 		return false;
