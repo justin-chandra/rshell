@@ -44,3 +44,23 @@ bool Or::evaluate()
 
 	return false;
 }
+
+Rshell * Or::getParent()
+{
+	return this->parent;
+}
+
+void Or::setParent(Rshell * p)
+{
+	this->parent = p;
+}
+
+void Or::setFirst(Rshell * f)
+{
+	this->first = f;
+}
+
+void Or::setSecond(Rshell *s)
+{
+	this->second = s;
+}

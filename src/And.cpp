@@ -40,6 +40,27 @@ bool And::evaluate()
 		status = false;
 		return false;
 	}	
-	
+
 	return false;
 }
+
+Rshell * And::getParent()
+{
+	return this->parent;
+}
+
+void And::setParent(Rshell * p)
+{
+	this->parent = p;
+}
+
+void And::setFirst(Rshell * f)
+{
+	this->first = f;
+}
+
+void And::setSecond(Rshell * s)
+{
+	this->second = s;
+}
+

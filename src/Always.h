@@ -15,6 +15,7 @@ class Always: public Connector
 	public:
 		Rshell * first;
 		Rshell * second;
+		Rshell * parent;
 		string userInput;
 		bool status;
 		
@@ -22,6 +23,13 @@ class Always: public Connector
 		Always(stack<char *> s);
 		~Always();
 		bool evaluate();
+
+		Rshell * getParent();
+
+		void setParent(Rshell *);
+		void setFirst(Rshell *);
+		void setSecond(Rshell *);
+
 	private:
 };
 

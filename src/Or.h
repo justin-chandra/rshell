@@ -14,6 +14,7 @@ class Or: public Connector
 	public:
 		Rshell * first;
 		Rshell * second;
+		Rshell * parent;
 		string userInput;
 		bool status;
 
@@ -22,6 +23,13 @@ class Or: public Connector
 		Or(stack<char *>s);
 		Or(Rshell *f, Rshell *s);
 		bool evaluate();
+
+		Rshell * getParent();
+
+		void setParent(Rshell *);
+		void setFirst(Rshell *);
+		void setSecond(Rshell *);
+
 	private:
 };
 

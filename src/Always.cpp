@@ -32,3 +32,24 @@ bool Always::evaluate()
 {
 	return true;
 }
+
+Rshell * Always::getParent()
+{
+	return this->parent;
+}
+
+void Always::setParent(Rshell * p)
+{
+	this->parent = p;
+}
+
+void Always::setFirst(Rshell * f)
+{
+	this->first = f;
+}
+
+void Always::setSecond(Rshell * s)
+{
+	this->second = s;
+}
+

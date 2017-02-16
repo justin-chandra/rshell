@@ -1,12 +1,11 @@
 CC=g++
 CC_FLAGS=-Wall -ansi
 
-#all: And Command Connector Or Always main
-all: And Command Or Always main
+all: And Command Connector Or Always main
 	
 Always:
 	mkdir -p bin
-	$(CC) -c $(CC_FLAGS) src/main.cpp -o bin/Always.o
+	$(CC) -c $(CC_FLAGS) src/Always.cpp -o bin/Always.o
 
 And:
 	mkdir -p bin
@@ -16,12 +15,13 @@ Command:
 	mkdir -p bin
 	$(CC) -c $(CC_FLAGS) src/Command.cpp -o bin/Command.o
 
-#Connector:
-#	mkdir -p bin
-#	$(CC) -c $(CC_FLAGS) src/Connector.cpp -o bin/Connector.o
+Connector:
+	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/Connector.cpp -o bin/Connector.o
 
 main: 
 	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/main.cpp -o bin/main.o
 	$(CC) bin/*.o -o bin/rshell
 
 Or:

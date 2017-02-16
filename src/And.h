@@ -24,6 +24,9 @@ class And: public Connector
 
 
 		bool evaluate();
+		
+		Rshell * getParent();
+
 		void setParent(Rshell *);
 		void setFirst(Rshell *);
 		void setSecond(Rshell *);
