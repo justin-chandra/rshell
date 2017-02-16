@@ -6,6 +6,7 @@
 #include <limits.h>
 #include <vector>
 #include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -17,7 +18,8 @@ using namespace std;
 #include "Always.h"
 #include "Command.h"
 
-stack<Rshell *> build(stack<char *> & in);
+//stack<Rshell *> build(stack<char *> & in);
+queue<Rshell *> build(queue<char *> & in);
 void stack_print(stack<char *> s);
 char * combine(stack<char *> s);
 Rshell * tree(stack<Rshell *> & s);
@@ -25,7 +27,9 @@ void empty_stack(stack<char *> & s);
 
 int main(int argc, char * argv[])
 {	
-	stack<char *> in;	
+	stack<char *> in;
+
+	queue<char *> qin;
 
 	//gets username
 	char hostname[HOST_NAME_MAX];
@@ -37,7 +41,8 @@ int main(int argc, char * argv[])
 	string input;
 	while (1 == 1)
 	{
-		stack<Rshell *> connectors;
+		//stack<Rshell *> connectors;
+		queue<Rshell *> connectors;
 		cout << username << "@" << hostname << "$ ";
 		getline(cin, input);
 
@@ -55,7 +60,8 @@ int main(int argc, char * argv[])
 			{
 				return 0;
 			}
-			in.push(parsed);
+			//in.push(parsed);
+			qin.push(parsed);
 		}
 		while (parsed != NULL)
 		{
@@ -67,12 +73,13 @@ int main(int argc, char * argv[])
 					return 0;
 				}
 
-				in.push(parsed);
+				//in.push(parsed);
+				qin.push(parsed);
 			}
 		}
-		connectors = build(in);		
-		Rshell * root = tree(connectors);
-		root->evaluate();
+		connectors = build(qin);		
+		//Rshell * root = tree(connectors);
+		//root->evaluate();
 		delete [] cstring;
 	}
 
@@ -97,6 +104,14 @@ Rshell * tree(stack<Rshell *> & s)
 	return root;		
 }
 
+queue <Rshell *> build(queue<char*> & qin)
+{
+	queue<Rshell *> c;
+
+	return c;
+}
+
+/*
 stack<Rshell *> build(stack<char*> & in)
 {
 	stack<Rshell *> c;
@@ -147,16 +162,6 @@ stack<Rshell *> build(stack<char*> & in)
 	//and pass it into the command constructor
 	if (!temp_stack.empty())
 	{
-		/*
-		//char * test1 = combine(temp_stack);
-		//Rshell * test = new Command(test1);
-		Command * test = new Command(temp_stack);
-		//test->evaluate();
-		Rshell * single = c.top();
-		c.pop();
-		single->setFirst(test);
-		c.push(single);
-		*/
 		if (c.empty())
 		{
 			//single command
@@ -174,7 +179,7 @@ stack<Rshell *> build(stack<char*> & in)
 	}
 	return c;
 }
-
+*/
 void empty_stack(stack<char *> & s)
 {
 	while(!s.empty())

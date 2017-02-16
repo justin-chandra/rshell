@@ -31,7 +31,7 @@ bool And::evaluate()
 {
 	if (first->evaluate() == true)
 	{
-		
+		second->evaluate();
 		status = true;
 		return true;
 	}

@@ -24,12 +24,14 @@ Command::Command(stack<char *> s)
 		s.pop();
 	}
 	v.push_back('\0');
+	/*
 	cout << "Making: ";
 	for (unsigned i = 0; v[i] != '\0'; ++i)
 	{
 		cout << v[i];
 	}
 	cout << endl;
+	*/
 }
 
 Command::Command(char * temp)
@@ -62,9 +64,10 @@ bool Command::evaluate()
 		char ** vloc = &v[0];
 		if (execvp(v.at(0), vloc) == -1)
 		{
-			cout << "execvp in bool Command::evaluate() failed" << endl;
+			//cout << "execvp in bool Command::evaluate() failed" << endl;
+			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
 			return false;
-			return -1;
+			//return -1;
 		}
 	}
 	else if (child_pid > 0)
