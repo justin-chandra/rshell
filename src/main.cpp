@@ -18,11 +18,9 @@ using namespace std;
 #include "Always.h"
 #include "Command.h"
 
-//stack<Rshell *> build(stack<char *> & in);
 vector<Rshell *> build(stack<char *> & in);
 void stack_print(stack<char *> s);
 char * combine(stack<char *> s);
-//Rshell * tree(stack<Rshell *> & s);
 Rshell * tree(vector<Rshell *> & v);
 void empty_stack(stack<char *> & s);
 
@@ -38,7 +36,7 @@ int main(int argc, char * argv[])
 	gethostname(hostname, HOST_NAME_MAX);
 	getlogin_r(username, LOGIN_NAME_MAX);	
 
-
+	string comment = "#";
 	string input;
 	while (1 == 1)
 	{
@@ -53,35 +51,30 @@ int main(int argc, char * argv[])
 		strcpy(cstring, input.c_str());
 
 		char * parsed = strtok(cstring, " ");
-		//exit needs to be somewhere else where it can be caught
-		//during execution
-		string exit = "exit";
 		if (parsed != NULL)
 		{
-			if (parsed == exit)
-			{
-				return 0;
-			}
 			in.push(parsed);
-			//qin.push(parsed);
 		}
 		while (parsed != NULL)
 		{
 			parsed = strtok(NULL, " ");
 			if (parsed != NULL)
 			{
-				if (parsed == exit)
+				if (parsed == comment)
 				{
-					return 0;
+					break;
 				}
-
+				if (strlen(parsed) > 0)
+				{
+					if (parsed[0] == '#')
+					{
+						break;
+					}
+				}
 				in.push(parsed);
-				//qin.push(parsed);
 			}
 		}
-		//connectors = build(in);
 		conn = build(in);
-		//cout << conn.size() << endl;
 		Rshell * root = tree(conn);
 		if (root->evaluate() == -1)
 		{
@@ -93,25 +86,6 @@ int main(int argc, char * argv[])
 	return 0;
 }
 
-/*
-Rshell * tree(stack<Rshell *> & s)
-{
-	Rshell * root = s.top();
-	Rshell * temp = s.top();
-	while (!s.empty())
-	{
-		temp = s.top();
-		if (!root)
-		{
-			root->setFirst(temp);
-			root = temp;
-		}
-		s.pop();
-	}
-
-	return root;		
-}
-*/
 Rshell * tree(vector<Rshell *> & v)
 {
 	Rshell * root = v.at(v.size() - 1);
@@ -119,14 +93,13 @@ Rshell * tree(vector<Rshell *> & v)
 	v.pop_back();
 	while (v.size() > 0)
 	{
-		//cout << v.size() << " root loop" << endl;
 		temp = v.at(v.size() - 1);
 		if (!root)
 		{
 			//root->setFirst(temp);
 			temp->setFirst(root);
 			root->setParent(temp);
-			
+
 			root = temp;
 		}
 		v.pop_back();
@@ -197,79 +170,7 @@ vector<Rshell *> build(stack<char *> & in)
 	}
 	return c;
 }
-/*
-stack<Rshell *> build(stack<char*> & in)
-{
-	stack<Rshell *> c;
 
-	string and_string = "&&";
-	string or_string = "||";
-	string always_string = ";";
-	string comment_string = "#";
-
-	//pop until we get a connector
-	//put into temp stack
-	stack<char *> temp_stack;
-	while (!in.empty())
-	{
-		char * temp = in.top();
-		temp_stack.push(in.top());
-		in.pop();	
-		//found a connector
-		if (temp == and_string)
-		{
-			//put other stack into char* []?
-			Rshell * _and = new And(temp_stack);
-			c.push(_and);
-			empty_stack(temp_stack);
-		}
-		else if (temp == or_string)
-		{
-			Rshell * _or = new Or(temp_stack);
-			c.push(_or);
-			empty_stack(temp_stack);
-		}
-		else if (temp == always_string)
-		{
-			Rshell * _always = new Always(temp_stack);
-			c.push(_always);
-			empty_stack(temp_stack);
-		}
-		else if (temp == comment_string)
-		{
-			//do something
-			cout << "early return" << endl;
-			return c;
-		}
-		//empty_stack(temp_stack);
-	}
-	//no connectors
-	//need to combine the rest of the stuff for a command
-	//and pass it into the command constructor
-	if (!temp_stack.empty())
-	{
-		if (c.empty())
-		{
-			//single command
-			Command * single_command = new Command(temp_stack);
-			c.push(single_command);
-		}
-		else if (!c.empty())
-		{
-			Command * last_command = new Command(temp_stack);
-			Rshell * last_connector = c.top();
-			//there is a segmentation fault when the 
-			//the pop statement below is executed
-			//try making a vector
-			c.pop();
-			//cout << last_connector->evaluate() << endl;
-			last_connector->setFirst(last_command);
-			c.push(last_connector);
-		}
-	}
-	return c;
-}
-*/
 void empty_stack(stack<char *> & s)
 {
 	while(!s.empty())
