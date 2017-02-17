@@ -43,7 +43,8 @@ And::~And()
 
 bool And::evaluate()
 {
-	if (first->evaluate() == true)
+	//evaluates left and right children
+	if (first->evaluate() == true) 
 	{
 		second->evaluate();
 		status = true;
@@ -57,7 +58,7 @@ bool And::evaluate()
 
 	return true;
 }
-
+//the rest of these should be self explanatory based on the function name, but y'know... this sets first, second, and parent to... what first, second, and the parent are... and also enables you to get the parent... because rshell is going to need to be able to do that in order to function... yeah...
 Rshell * And::getParent()
 {
 	return this->parent;

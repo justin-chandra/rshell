@@ -1,0 +1,13 @@
+echo a && echo b   
+echo a && blubblub 
+blubblub && echo a 
+echo a || blubblub 
+blubblub || echo a
+blubblub; echo a
+
+echo a && echo b && echo c
+echo a && echo b || echo c
+echo a || echo b && echo c
+echo a || echo b || echo c
+blubblub; echo a
+blubblub; echo a && echo b
