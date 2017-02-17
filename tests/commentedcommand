@@ -1,2 +1,30 @@
 echo a #echoes a
 echo a && echo b #echoes a and b
+echo a #lorem ipsum
+echo lorem ipsum || lorem #lorem ipsum
+echo dslkfjsd; #sdfjdsf
+
+echo a # echoes a
+echo a && echo b # echoes a and b
+echo a # lorem ipsum
+echo lorem ipsum || lorem # lorem ipsum
+echo dslkfjsd; # sdfjdsf
+
+echo a && echo b  
+echo a && blubblub 
+blubblub && echo a 
+echo a || blubblub 
+blubblub || echo a
+iuakejsmoik || ddsfsfds
+sdjfskf && dsjfdlks
+blubblub; echo a
+echo a; posdjfls
+
+echo a #sdfdfsdf && echo b # dsfsfsf && echo c
+echo a && echo b || echo c #edskfjsdk # lsdjfsldkf
+echo a # sdkjfs || echo b # dsjfdsf && echo c # kdsjflskdf 
+echo a # || echo b # || echo c # 
+echo lorem ipsum || #blubblub echo a || echo c
+ls && #blubblub echo a && echo b
+
+echo a && echo b && echo c || echo a && echo b || echo c && echo a || echo b && echo c || echo a || echo b || echo c && blubblub; echo a || echo c #; && blubblub; echo a && echo b #fgbdhgfg

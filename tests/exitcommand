@@ -3,3 +3,29 @@ echo a && exit b exit
 echo a exit #comment
 echo a && echo b exit #comment
 echo a || blubblub exit #comment
+
+echo a exit && echo b   
+echo a && blubblub exit
+blubblub && echo a exit
+echo a || blubblub exit
+blubblub || echo a
+iuakejsmoik || ddsfsfds
+sdjfskf && dsjfdlks
+blubblub; echo a
+echo a; posdjfls
+
+echo a && echo b && echo c
+echo a && echo b || echo c
+echo a || echo b && echo c
+echo a || echo b || echo c
+blubblub; echo a || echo c
+blubblub; echo a && echo b
+
+echo a && echo b && echo c || echo a && echo b || echo c && echo a || echo b && echo c || echo a || echo b || echo c && blubblub; echo a || echo c && blubblub; echo a && echo b exit
+
+exit file && exit ls
+times exit && ls && dir
+touch exit
+uname exit
+exit who && uname && times
+

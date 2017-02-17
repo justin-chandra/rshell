@@ -1,3 +1,4 @@
 echo hi
+cat README.md
 ls
 exit
