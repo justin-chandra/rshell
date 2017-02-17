@@ -1,0 +1,2 @@
+echo a #echoes a
+echo a && echo b #echoes a and b

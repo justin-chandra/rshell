@@ -3,5 +3,6 @@
 
 Rshell imitates BASH. [add more later]
 
-File list: [Title "Table of Contents??"]
+File list:
+
 [update as progress goes]

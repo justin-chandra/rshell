@@ -1,0 +1,5 @@
+echo a exit
+echo a && exit b exit
+echo a exit #comment
+echo a && echo b exit #comment
+echo a || blubblub exit #comment
