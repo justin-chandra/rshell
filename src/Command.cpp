@@ -67,6 +67,10 @@ bool Command::evaluate()
 {
 	//pid_t parent = getpid();
 	string exit = "exit";
+	if (v.at(0) == exit)
+	{
+		std::exit(0);
+	}
 	pid_t child_pid = fork();
 
 	if (child_pid == -1)
@@ -80,7 +84,6 @@ bool Command::evaluate()
 		{
 			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
 			return false;
-			//return -1;
 		}
 	}
 	else if (child_pid > 0)

@@ -78,6 +78,7 @@ int main(int argc, char * argv[])
 		Rshell * root = tree(conn);
 		if (root->evaluate() == -1)
 		{
+			cout << "exit early pls" << endl;
 			return 0;
 		}
 		delete [] cstring;
