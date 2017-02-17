@@ -76,7 +76,10 @@ int main(int argc, char * argv[])
 		}
 		conn = build(in);
 		Rshell * root = tree(conn);
-		root->evaluate();
+		if (root != NULL)
+		{
+			root->evaluate();
+		}
 		delete [] cstring;
 	}
 
