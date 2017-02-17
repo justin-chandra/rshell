@@ -49,12 +49,6 @@ Command::Command(stack<char *> s)
 
 Command::Command(char * temp)
 {
-	/*
-	   for (unsigned i = 0; temp[i] != '\0'; ++i)
-	   {
-	   args[i] = temp[i];
-	   }
-	   */
 	args[0] = temp;
 }
 
@@ -67,16 +61,18 @@ bool Command::evaluate()
 {
 	//pid_t parent = getpid();
 	string exit = "exit";
+	int status;
 	if (!v.empty())
 	{
 		if (v.at(0) == exit)
 		{
-			_exit(1);
+			//_exit(1);
+			std::exit(1);
 		}
 	}
 	pid_t child_pid = fork();
 
-	if (child_pid == -1)
+	if (child_pid < 0)
 	{
 		cout << "Fork failed in: " << endl << "bool Command::evaluate()" << endl;
 	}
@@ -86,19 +82,27 @@ bool Command::evaluate()
 		if (execvp(v.at(0), vloc) == -1)
 		{
 			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
-			_exit(1);
-			return false;
+			//the or issue with first thing is taken care of if the line below
+			//is taken out
+			_exit(-1); 
+			//cout << "returning false in execvp if" << endl;
+			//return false;
 		}
-		_exit(1);
-		return true;
+		//_exit(1);
+		//cout << "returning true" << endl;
+		//return true;
 	}
 	else if (child_pid > 0)
 	{
-		int status;
 		waitpid(child_pid, &status, 0);
-		return true;
+		/*
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+		{
+			return status;
+		}
+		*/
 	}
-	return false;
+	return true;
 }
 
 

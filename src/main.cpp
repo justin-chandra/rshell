@@ -54,10 +54,23 @@ int main(int argc, char * argv[])
 		string sc = ";";
 		char * semicolon_string = new char[1];
 		strcpy(semicolon_string, sc.c_str());		
+		bool semicolon_bool = false;
 
 		if (parsed != NULL)
 		{
+			for (unsigned i = 0; parsed[i] != '\0'; ++i)
+			{
+				if (parsed[i] == ';')
+				{
+					semicolon_bool = true;
+					parsed[i] = '\0';
+				}
+			}	
 			in.push(parsed);
+			if (semicolon_bool)
+			{
+				in.push(semicolon_string);
+			}
 		}
 		while (parsed != NULL)
 		{
@@ -76,25 +89,19 @@ int main(int argc, char * argv[])
 						break;
 
 					}
-					//find the semicolon at the end of the string
-					if (strlen(parsed) > 1)
+				}
+				for (unsigned i = 0; parsed[i] != '\0'; ++i)
+				{
+					if (parsed[i] == ';')
 					{
-						if (parsed[strlen(parsed) - 1] == ';')
-						{
-							//cout << "end: " << parsed[strlen(parsed) - 1] << endl;
-							parsed[strlen(parsed) - 1] = '\0';
-
-							//cout << "No semi: " << parsed << endl;
-							semicolon = true;
-						}
+						semicolon = true;
+						parsed[i] = '\0';
+						break;
 					}
 				}
 				in.push(parsed);
 				if (semicolon)
 				{
-					//it only works if there are two invalid strings
-					//sdfsdf sdfsdf; echo a 
-					//works
 					in.push(semicolon_string);
 				}
 			}
@@ -148,19 +155,6 @@ vector<Rshell *> build(stack<char *> & in)
 		char * temp = in.top();
 		temp_stack.push(in.top());
 		in.pop();
-		/*
-		   for (unsigned i = 0; i < strlen(temp); ++i)
-		   {
-		   if (temp[i] == ';')
-		   {
-		   temp[i] = '\0';
-		   cout << "found ; " << endl;
-		   Rshell * always = new Always(temp_stack);
-		   c.push_back(always);
-		   break;	
-		   }
-		   }
-		   */
 		if (temp == and_string)
 		{
 			temp_stack.pop();
@@ -199,6 +193,7 @@ vector<Rshell *> build(stack<char *> & in)
 		{
 			Command * last_command = new Command(temp_stack);
 			c.at(c.size() - 1)->setFirst(last_command);
+			//c.back()->setFirst(last_command);
 		}
 	}
 	return c;
