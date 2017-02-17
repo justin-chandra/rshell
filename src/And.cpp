@@ -55,7 +55,7 @@ bool And::evaluate()
 		return false;
 	}	
 
-	return false;
+	return true;
 }
 
 Rshell * And::getParent()

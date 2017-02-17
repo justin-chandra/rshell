@@ -19,7 +19,7 @@ Always::Always()
 
 Always::Always(stack<char *> s)
 {
-	Command *c = new Command(s);
+	Command * c = new Command(s);
 	this->second = c;
 }
 

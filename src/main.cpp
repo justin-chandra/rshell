@@ -81,8 +81,12 @@ int main(int argc, char * argv[])
 		}
 		//connectors = build(in);
 		conn = build(in);
+		//cout << conn.size() << endl;
 		Rshell * root = tree(conn);
-		root->evaluate();
+		if (root->evaluate() == -1)
+		{
+			return 0;
+		}
 		delete [] cstring;
 	}
 
@@ -112,12 +116,17 @@ Rshell * tree(vector<Rshell *> & v)
 {
 	Rshell * root = v.at(v.size() - 1);
 	Rshell * temp = root;
+	v.pop_back();
 	while (v.size() > 0)
 	{
+		//cout << v.size() << " root loop" << endl;
 		temp = v.at(v.size() - 1);
 		if (!root)
 		{
-			root->setFirst(temp);
+			//root->setFirst(temp);
+			temp->setFirst(root);
+			root->setParent(temp);
+			
 			root = temp;
 		}
 		v.pop_back();
@@ -140,15 +149,16 @@ vector<Rshell *> build(stack<char *> & in)
 	{
 		char * temp = in.top();
 		temp_stack.push(in.top());
-		in.pop();	
+		in.pop();
+		bool semicolon = false;
 		//found a connector
 		if (temp == and_string)
 		{
 			//put other stack into char* []?
 			temp_stack.pop();
 			Rshell * _and = new And(temp_stack);
-			cout << "Printing stack: ";
-			stack_print(temp_stack);
+			//cout << "Printing stack: ";
+			//stack_print(temp_stack);
 			c.push_back(_and);
 			empty_stack(temp_stack);
 		}
@@ -159,7 +169,7 @@ vector<Rshell *> build(stack<char *> & in)
 			c.push_back(_or);
 			empty_stack(temp_stack);
 		}
-		else if (temp == always_string)
+		else if (semicolon || ( temp == always_string))
 		{
 			temp_stack.pop();
 			Rshell * _always = new Always(temp_stack);
@@ -168,30 +178,20 @@ vector<Rshell *> build(stack<char *> & in)
 		}
 		else if (temp == comment_string)
 		{
-			//do something
-			cout << "early return" << endl;
-			return c;
+			break;
 		}
-		//empty_stack(temp_stack);
 	}
-	//no connectors
-	//need to combine the rest of the stuff for a command
-	//and pass it into the command constructor
+
 	if (!temp_stack.empty())
 	{
 		if (c.empty())
 		{
-			//single command
 			Command * single_command = new Command(temp_stack);
 			c.push_back(single_command);
 		}
 		else if (!c.empty())
 		{
-			//this is supposed to be the last command 
-			//in echo a && echo b && ls
 			Command * last_command = new Command(temp_stack);
-			cout << "Printing stack: ";
-			stack_print(temp_stack);
 			c.at(c.size() - 1)->setFirst(last_command);
 		}
 	}
