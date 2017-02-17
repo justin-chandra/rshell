@@ -76,13 +76,8 @@ bool Command::evaluate()
 	else if (child_pid == 0)
 	{
 		char ** vloc = &v[0];
-		if (v.at(0) == exit)
-		{
-			return -1;
-		}
 		if (execvp(v.at(0), vloc) == -1)
 		{
-			//cout << "execvp in bool Command::evaluate() failed" << endl;
 			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
 			return false;
 			//return -1;
