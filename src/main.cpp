@@ -77,19 +77,17 @@ int main(int argc, char * argv[])
 
 					}
 					//find the semicolon at the end of the string
-					/*
 					if (strlen(parsed) > 1)
 					{
 						if (parsed[strlen(parsed) - 1] == ';')
 						{
-							cout << "end: " << parsed[strlen(parsed) - 1] << endl;
+							//cout << "end: " << parsed[strlen(parsed) - 1] << endl;
 							parsed[strlen(parsed) - 1] = '\0';
 
-							cout << "No semi: " << parsed << endl;
+							//cout << "No semi: " << parsed << endl;
 							semicolon = true;
 						}
 					}
-					*/
 				}
 				in.push(parsed);
 				if (semicolon)
