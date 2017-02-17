@@ -38,23 +38,23 @@ Command::Command(stack<char *> s)
 	}
 	v.push_back('\0');
 	/*
-	cout << "Making: ";
-	for (unsigned i = 0; v[i] != '\0'; ++i)
-	{
-		cout << v[i];
-	}
-	cout << endl;
-	*/
+	   cout << "Making: ";
+	   for (unsigned i = 0; v[i] != '\0'; ++i)
+	   {
+	   cout << v[i];
+	   }
+	   cout << endl;
+	   */
 }
 
 Command::Command(char * temp)
 {
 	/*
-	for (unsigned i = 0; temp[i] != '\0'; ++i)
-	{
-		args[i] = temp[i];
-	}
-	*/
+	   for (unsigned i = 0; temp[i] != '\0'; ++i)
+	   {
+	   args[i] = temp[i];
+	   }
+	   */
 	args[0] = temp;
 }
 
@@ -67,9 +67,12 @@ bool Command::evaluate()
 {
 	//pid_t parent = getpid();
 	string exit = "exit";
-	if (v.at(0) == exit)
+	if (!v.empty())
 	{
-		std::exit(0);
+		if (v.at(0) == exit)
+		{
+			_exit(1);
+		}
 	}
 	pid_t child_pid = fork();
 
@@ -83,8 +86,10 @@ bool Command::evaluate()
 		if (execvp(v.at(0), vloc) == -1)
 		{
 			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
+			_exit(1);
 			return false;
 		}
+		_exit(1);
 	}
 	else if (child_pid > 0)
 	{

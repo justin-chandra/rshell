@@ -76,11 +76,7 @@ int main(int argc, char * argv[])
 		}
 		conn = build(in);
 		Rshell * root = tree(conn);
-		if (root->evaluate() == -1)
-		{
-			cout << "exit early pls" << endl;
-			return 0;
-		}
+		root->evaluate();
 		delete [] cstring;
 	}
 
@@ -89,20 +85,22 @@ int main(int argc, char * argv[])
 
 Rshell * tree(vector<Rshell *> & v)
 {
-	Rshell * root = v.at(v.size() - 1);
-	Rshell * temp = root;
-	v.pop_back();
-	while (v.size() > 0)
+	Rshell * root = NULL;
+	Rshell * temp = NULL;
+	if (!v.empty())
 	{
-		temp = v.at(v.size() - 1);
-		if (!root)
-		{
-			//root->setFirst(temp);
-			temp->setFirst(root);
-			root->setParent(temp);
+		root = v.back();
+		temp = root;
+		v.pop_back();
+	}
+	while (!v.empty())
+	{
+		temp = v.back();
+		//root->setFirst(temp);
+		temp->setFirst(root);
+		root->setParent(temp);
 
-			root = temp;
-		}
+		root = temp;
 		v.pop_back();
 	}
 	return root;
@@ -125,14 +123,23 @@ vector<Rshell *> build(stack<char *> & in)
 		temp_stack.push(in.top());
 		in.pop();
 		bool semicolon = false;
-		//found a connector
+		/*
+		   for (unsigned i = 0; i < strlen(temp); ++i)
+		   {
+		   if (temp[i] == ';')
+		   {
+		   temp[i] = '\0';
+		   cout << "found ; " << endl;
+		   Rshell * always = new Always(temp_stack);
+		   c.push_back(always);
+		   break;	
+		   }
+		   }
+		   */
 		if (temp == and_string)
 		{
-			//put other stack into char* []?
 			temp_stack.pop();
 			Rshell * _and = new And(temp_stack);
-			//cout << "Printing stack: ";
-			//stack_print(temp_stack);
 			c.push_back(_and);
 			empty_stack(temp_stack);
 		}
