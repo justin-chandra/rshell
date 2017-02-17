@@ -90,6 +90,7 @@ bool Command::evaluate()
 			return false;
 		}
 		_exit(1);
+		return true;
 	}
 	else if (child_pid > 0)
 	{
@@ -97,7 +98,7 @@ bool Command::evaluate()
 		waitpid(child_pid, &status, 0);
 		return true;
 	}
-	return true;
+	return false;
 }
 
 

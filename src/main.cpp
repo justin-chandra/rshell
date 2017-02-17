@@ -20,7 +20,6 @@ using namespace std;
 
 vector<Rshell *> build(stack<char *> & in);
 void stack_print(stack<char *> s);
-char * combine(stack<char *> s);
 Rshell * tree(vector<Rshell *> & v);
 void empty_stack(stack<char *> & s);
 
@@ -51,12 +50,18 @@ int main(int argc, char * argv[])
 		strcpy(cstring, input.c_str());
 
 		char * parsed = strtok(cstring, " ");
+
+		string sc = ";";
+		char * semicolon_string = new char[1];
+		strcpy(semicolon_string, sc.c_str());		
+
 		if (parsed != NULL)
 		{
 			in.push(parsed);
 		}
 		while (parsed != NULL)
 		{
+			bool semicolon = false;
 			parsed = strtok(NULL, " ");
 			if (parsed != NULL)
 			{
@@ -69,9 +74,31 @@ int main(int argc, char * argv[])
 					if (parsed[0] == '#')
 					{
 						break;
+
 					}
+					//find the semicolon at the end of the string
+					/*
+					if (strlen(parsed) > 1)
+					{
+						if (parsed[strlen(parsed) - 1] == ';')
+						{
+							cout << "end: " << parsed[strlen(parsed) - 1] << endl;
+							parsed[strlen(parsed) - 1] = '\0';
+
+							cout << "No semi: " << parsed << endl;
+							semicolon = true;
+						}
+					}
+					*/
 				}
 				in.push(parsed);
+				if (semicolon)
+				{
+					//it only works if there are two invalid strings
+					//sdfsdf sdfsdf; echo a 
+					//works
+					in.push(semicolon_string);
+				}
 			}
 		}
 		conn = build(in);
@@ -82,7 +109,6 @@ int main(int argc, char * argv[])
 		}
 		delete [] cstring;
 	}
-
 	return 0;
 }
 
@@ -99,7 +125,6 @@ Rshell * tree(vector<Rshell *> & v)
 	while (!v.empty())
 	{
 		temp = v.back();
-		//root->setFirst(temp);
 		temp->setFirst(root);
 		root->setParent(temp);
 
@@ -125,7 +150,6 @@ vector<Rshell *> build(stack<char *> & in)
 		char * temp = in.top();
 		temp_stack.push(in.top());
 		in.pop();
-		bool semicolon = false;
 		/*
 		   for (unsigned i = 0; i < strlen(temp); ++i)
 		   {
@@ -153,7 +177,7 @@ vector<Rshell *> build(stack<char *> & in)
 			c.push_back(_or);
 			empty_stack(temp_stack);
 		}
-		else if (semicolon || ( temp == always_string))
+		else if (temp == always_string)
 		{
 			temp_stack.pop();
 			Rshell * _always = new Always(temp_stack);
@@ -188,21 +212,6 @@ void empty_stack(stack<char *> & s)
 	{
 		s.pop();
 	}
-}
-
-char * combine(stack<char*> s)
-{
-	//try combining all the char * then making them into
-	//char * [] in the constructor, appears to work here
-
-	char * temp = s.top();
-	s.pop();
-	while(!s.empty())
-	{
-		strcat(temp, s.top());
-		s.pop();	
-	}
-	return temp;
 }
 
 void stack_print(stack<char *> s)
