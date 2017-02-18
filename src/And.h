@@ -25,7 +25,6 @@ class And: public Connector
 		string userInput;
 		bool status;
 
-
 		bool evaluate();
 		
 		Rshell * getParent();

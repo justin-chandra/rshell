@@ -14,16 +14,19 @@ Connector::~Connector()
 
 }
 
+//the default response is false here
 bool Connector::evaluate()
 {
 	return false;
 }
 
+//returns parent
 Rshell * Connector::getParent()
 {
 	return this->parent;	
 }
 
+//set parent and children
 void Connector::setParent(Rshell * p)
 {
 	this->parent = p;	
