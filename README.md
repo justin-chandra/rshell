@@ -1,9 +1,9 @@
 # rshell
 ![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/logo.png)  
-Logo made with [OnlineLogoMaker](http://www.onlinelogomaker.com/logomaker/#)  
+Logo made with [OnlineLogoMaker.](http://www.onlinelogomaker.com/logomaker/#)  
 Rshell imitates BASH, able to execute all the built in BASH commands.  
 
-HOW TO USE:  
+#How to Use:  
 ```
 cd rshell/  
 make  
@@ -11,25 +11,27 @@ make
 ```    
 Note: Running the rshell within the rshell is not recommended, as it can lead to memory problems.
   
-LIST OF KNOWN BUGS:  
+#List of Known Bugs:  
 	-executing a command with a connector with a comment directly after (and not an argument) will result in a segmentation fault. e.g.
 ```
  echo lorem && #ipsum
 ```
   
-EXECVP CODE SNIPPET:  
+#execvp code snippet:  
 ```
-
+char ** vloc = &v[0];
+		if (execvp(v.at(0), vloc) == -1)
+		{
+			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
+			_exit(1); 
+		}
 ```  
-UML DIAGRAM:  
+#UML Diagram:  
+  
 ![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/download.png) 
 
 
 
-
-
-
-
-AUTHORS:  
+#Authors:  
 J. Chandra  
 A. Der
