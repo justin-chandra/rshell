@@ -12,7 +12,7 @@ make
 Note: Running the rshell within the rshell is not recommended, as it can lead to memory problems.
   
 ##List of Known Bugs:  
-	-executing a command with a connector with a comment directly after (and not an argument) will result in a segmentation fault. e.g.
+* executing a command with a connector with a comment directly after (instead of an argument) will result in a segmentation fault. e.g.
 ```
  echo lorem && #ipsum
 ```
