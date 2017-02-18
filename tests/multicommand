@@ -23,7 +23,7 @@ cat multiCommand
 dir && ls
 file && ls
 logname
-times
+times && cat README.md
 times && ls && dir
 touch
 uname
