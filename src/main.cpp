@@ -65,8 +65,12 @@ int main(int argc, char * argv[])
 					semicolon_bool = true;
 					parsed[i] = '\0';
 				}
+			}
+			if (parsed[0] != '#')
+			{
+				in.push(parsed);
 			}	
-			in.push(parsed);
+			//in.push(parsed);
 			if (semicolon_bool)
 			{
 				in.push(semicolon_string);
@@ -86,6 +90,7 @@ int main(int argc, char * argv[])
 				{
 					if (parsed[0] == '#')
 					{
+						parsed[0] = '\0';
 						break;
 
 					}
