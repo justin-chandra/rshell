@@ -1,7 +1,7 @@
 # rshell
-![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/logo.png)
-
-Rshell imitates BASH, able to execute all the built in BASH commands.
+![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/logo.png)  
+Logo made with [OnlineLogoMaker](http://www.onlinelogomaker.com/logomaker/#)  
+Rshell imitates BASH, able to execute all the built in BASH commands.  
 
 HOW TO USE:  
 ```
@@ -20,7 +20,9 @@ LIST OF KNOWN BUGS:
 EXECVP CODE SNIPPET:  
 ```
 
-```
+```  
+UML DIAGRAM:  
+![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/download.png) 
 
 
 
