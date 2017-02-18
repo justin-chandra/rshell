@@ -2,12 +2,13 @@ echo a # echoes a
 echo a && echo b # echoes a and b
 echo a # lorem ipsum
 echo lorem ipsum || lorem # lorem ipsum
-#echo dslkfjsd; # sdfjdsf
 
 echo a #sdfdfsdf && echo b # dsfsfsf && echo c
 echo a && echo b || echo c #edskfjsdk # lsdjfsldkf
 echo a # sdkjfs || echo b # dsjfdsf && echo c # kdsjflskdf 
 echo a # || echo b # || echo c # 
 
-#echo a && echo b && echo c || echo a && echo b || echo c && echo a || echo b && echo c || echo a || echo b || echo c && blubblub; echo a || echo c #; && blubblub; echo a && echo b #fgbdhgfg
+ls # -l
+
+
 exit
