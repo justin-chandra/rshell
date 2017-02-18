@@ -52,7 +52,7 @@ bool Command::evaluate()
 	//forks the current process to execute additional processes
 	if (child_pid < 0)
 	{
-		cout << "Fork failed in: " << endl << "bool Command::evaluate()" << endl;
+		perror("fork failure");
 	}
 	else if (child_pid == 0)
 	{
@@ -60,7 +60,8 @@ bool Command::evaluate()
 		char ** vloc = &v[0];
 		if (execvp(v.at(0), vloc) == -1)
 		{
-			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
+			//cout << "-rshell: " << v.at(0) << ": command not found" << endl;
+			perror("execvp");
 			_exit(1); 
 		}
 	}
@@ -69,7 +70,7 @@ bool Command::evaluate()
 		//handles exit status and wait error
 		if (waitpid(child_pid, &status, 0) == -1)
 		{
-			//cout << "wait error" << endl;
+			perror("wait failed");
 		}
 		if (WEXITSTATUS(status) != 0)
 		{
