@@ -10,6 +10,8 @@ using namespace std;
 #ifndef Always_H
 #define Always_H
 
+//looks similar to And.h and Or.h
+
 class Always: public Connector
 {
 	public:

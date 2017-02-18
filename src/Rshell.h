@@ -13,7 +13,8 @@ class Rshell
 	Rshell * parent;
 	string userInput;
 	bool status;
-
+	
+	//virtual because it's composite
 	virtual Rshell * getParent() = 0;
 	virtual void setParent(Rshell *) = 0;
 	virtual void setFirst(Rshell *) = 0;

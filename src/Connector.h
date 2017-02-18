@@ -18,6 +18,7 @@ class Connector: public Rshell
 	string userInput;
 	bool status;
 
+	//virtual because they're composite
 	virtual bool evaluate();
 	virtual Rshell * getParent();
 	virtual void setParent(Rshell *);

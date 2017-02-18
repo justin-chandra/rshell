@@ -30,6 +30,7 @@ Or::~Or()
 
 bool Or::evaluate()
 {
+	//evaluates children
 	if (first->evaluate() == false)
 	{
 		second->evaluate();
@@ -45,11 +46,13 @@ bool Or::evaluate()
 	return true;
 }
 
+//returns the parent
 Rshell * Or::getParent()
 {
 	return this->parent;
 }
 
+//sets parent and chidlren
 void Or::setParent(Rshell * p)
 {
 	this->parent = p;

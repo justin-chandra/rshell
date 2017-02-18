@@ -3,6 +3,5 @@
 
 Rshell imitates BASH. [add more later]
 
-File list:
 
-[update as progress goes]
+
