@@ -16,7 +16,6 @@ class And: public Connector
 		And(Rshell *, Rshell*);
 		And(Rshell *);
 		And(stack<char *>s);
-		And(queue<char *> q);
 		And();
 		~And();
 

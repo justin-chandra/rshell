@@ -35,8 +35,6 @@ class Command: public Rshell
 
 		Command();
 		Command(stack<char *>s);
-		Command(queue<char *> q);
-		Command(char * temp);
 		~Command();
 		bool evaluate();
 
@@ -45,9 +43,7 @@ class Command: public Rshell
 		void setParent(Rshell *) {};
 		void setFirst(Rshell *) {};
 		void setSecond(Rshell *) {};
-		
 
-		//test stuff
 	private:
 };
 

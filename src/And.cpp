@@ -25,12 +25,6 @@ And::And(stack<char *> s)
 	this->second = c;
 }
 
-And::And(queue<char *> q)
-{
-	Command * c = new Command(q);
-	this->first = c;
-}
-
 And::And()
 {
 

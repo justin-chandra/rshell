@@ -19,29 +19,15 @@ Command::Command()
 
 }
 
-Command::Command(queue<char *> q)
-{
-	while (!q.empty())
-	{
-		v.push_back(q.front());
-		q.pop();
-	}
-	v.push_back('\0');
-}
-
 Command::Command(stack<char *> s)
 {
+	//builds the command into a vector<char*>
 	while (!s.empty())
 	{
 		v.push_back(s.top());
 		s.pop();
 	}
 	v.push_back('\0');
-}
-
-Command::Command(char * temp)
-{
-	args[0] = temp;
 }
 
 Command::~Command()
@@ -51,23 +37,26 @@ Command::~Command()
 
 bool Command::evaluate()
 {
+	//evaulates the command in vector
 	string exit = "exit";
 	int status;
 	if (!v.empty())
 	{
+		//if the exit command is called
 		if (v.at(0) == exit)
 		{
 			_exit(1);
 		}
 	}
 	pid_t child_pid = fork();
-
+	//forks the current process to execute additional processes
 	if (child_pid < 0)
 	{
 		cout << "Fork failed in: " << endl << "bool Command::evaluate()" << endl;
 	}
 	else if (child_pid == 0)
 	{
+		//executes the given command
 		char ** vloc = &v[0];
 		if (execvp(v.at(0), vloc) == -1)
 		{
@@ -77,6 +66,7 @@ bool Command::evaluate()
 	}
 	else if (child_pid > 0)
 	{
+		//handles exit status and wait error
 		if (waitpid(child_pid, &status, 0) == -1)
 		{
 			//cout << "wait error" << endl;
