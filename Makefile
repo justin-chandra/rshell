@@ -1,5 +1,5 @@
 CC=g++
-CC_FLAGS=-Wall -ansi
+CC_FLAGS=-Wall -Werror -ansi -pedantic
 
 all: And Command Connector Or Always main
 	
