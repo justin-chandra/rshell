@@ -13,10 +13,14 @@ make
 Note: Running the rshell within the rshell is not recommended, as it can lead to memory problems.
   
 ##List of Known Bugs:  
-* executing a command with a connector with a comment directly after (instead of an argument) will result in a segmentation fault. Example:
+* Executing a command with a connector with a comment directly after (instead of an argument) will result in a segmentation fault. Example:
 ```
  echo lorem && #ipsum
 ```
+* Executing a command with multiple semicolons and no spaces will result in a segmentation fault. Example: 
+```  
+lorem;ipsum;dolor
+```  
   
 ##execvp code snippet:  
 ```c++
