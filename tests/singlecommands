@@ -1,5 +1,10 @@
 echo hi 
 cat README.md 
 ls 
+times
+uname
+date
+dir
+echo lorem ipsum
 cd ..
 exit
