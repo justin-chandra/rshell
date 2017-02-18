@@ -1,5 +1,5 @@
 # rshell
-![alt tag] (https://scontent-sjc2-1.xx.fbcdn.net/v/t34.0-12/16522591_1195453097237149_1366364199_n.png?oh=f6a99679fada0549f17583640b47f392&oe=589991F6)
+![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/logo.png)
 
 Rshell imitates BASH, able to execute all the built in BASH commands.
 
