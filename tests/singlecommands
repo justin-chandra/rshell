@@ -6,4 +6,5 @@ uname
 date
 dir
 echo lorem ipsum
+cd ..
 exit
