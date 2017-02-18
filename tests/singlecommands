@@ -1,4 +1,4 @@
-echo hi
-cat README.md
-ls
+echo hi 
+cat README.md 
+ls 
 exit

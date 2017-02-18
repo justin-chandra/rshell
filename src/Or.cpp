@@ -42,7 +42,7 @@ bool Or::evaluate()
 		return false;
 	}	
 
-	return false;
+	return true;
 }
 
 Rshell * Or::getParent()

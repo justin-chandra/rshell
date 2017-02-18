@@ -28,4 +28,4 @@ times && ls && dir
 touch
 uname
 who && uname && times
-
+exit

@@ -20,7 +20,6 @@ using namespace std;
 
 vector<Rshell *> build(stack<char *> & in);
 void stack_print(stack<char *> s);
-char * combine(stack<char *> s);
 Rshell * tree(vector<Rshell *> & v);
 void empty_stack(stack<char *> & s);
 
@@ -51,12 +50,31 @@ int main(int argc, char * argv[])
 		strcpy(cstring, input.c_str());
 
 		char * parsed = strtok(cstring, " ");
+
+		string sc = ";";
+		char * semicolon_string = new char[1];
+		strcpy(semicolon_string, sc.c_str());		
+		bool semicolon_bool = false;
+
 		if (parsed != NULL)
 		{
+			for (unsigned i = 0; parsed[i] != '\0'; ++i)
+			{
+				if (parsed[i] == ';')
+				{
+					semicolon_bool = true;
+					parsed[i] = '\0';
+				}
+			}	
 			in.push(parsed);
+			if (semicolon_bool)
+			{
+				in.push(semicolon_string);
+			}
 		}
 		while (parsed != NULL)
 		{
+			bool semicolon = false;
 			parsed = strtok(NULL, " ");
 			if (parsed != NULL)
 			{
@@ -69,39 +87,53 @@ int main(int argc, char * argv[])
 					if (parsed[0] == '#')
 					{
 						break;
+
+					}
+				}
+				for (unsigned i = 0; parsed[i] != '\0'; ++i)
+				{
+					if (parsed[i] == ';')
+					{
+						semicolon = true;
+						parsed[i] = '\0';
+						break;
 					}
 				}
 				in.push(parsed);
+				if (semicolon)
+				{
+					in.push(semicolon_string);
+				}
 			}
 		}
 		conn = build(in);
 		Rshell * root = tree(conn);
-		if (root->evaluate() == -1)
+		if (root != NULL)
 		{
-			return 0;
+			root->evaluate();
 		}
 		delete [] cstring;
 	}
-
 	return 0;
 }
 
 Rshell * tree(vector<Rshell *> & v)
 {
-	Rshell * root = v.at(v.size() - 1);
-	Rshell * temp = root;
-	v.pop_back();
-	while (v.size() > 0)
+	Rshell * root = NULL;
+	Rshell * temp = NULL;
+	if (!v.empty())
 	{
-		temp = v.at(v.size() - 1);
-		if (!root)
-		{
-			//root->setFirst(temp);
-			temp->setFirst(root);
-			root->setParent(temp);
+		root = v.back();
+		temp = root;
+		v.pop_back();
+	}
+	while (!v.empty())
+	{
+		temp = v.back();
+		temp->setFirst(root);
+		root->setParent(temp);
 
-			root = temp;
-		}
+		root = temp;
 		v.pop_back();
 	}
 	return root;
@@ -123,15 +155,10 @@ vector<Rshell *> build(stack<char *> & in)
 		char * temp = in.top();
 		temp_stack.push(in.top());
 		in.pop();
-		bool semicolon = false;
-		//found a connector
 		if (temp == and_string)
 		{
-			//put other stack into char* []?
 			temp_stack.pop();
 			Rshell * _and = new And(temp_stack);
-			//cout << "Printing stack: ";
-			//stack_print(temp_stack);
 			c.push_back(_and);
 			empty_stack(temp_stack);
 		}
@@ -142,7 +169,7 @@ vector<Rshell *> build(stack<char *> & in)
 			c.push_back(_or);
 			empty_stack(temp_stack);
 		}
-		else if (semicolon || ( temp == always_string))
+		else if (temp == always_string)
 		{
 			temp_stack.pop();
 			Rshell * _always = new Always(temp_stack);
@@ -166,6 +193,7 @@ vector<Rshell *> build(stack<char *> & in)
 		{
 			Command * last_command = new Command(temp_stack);
 			c.at(c.size() - 1)->setFirst(last_command);
+			//c.back()->setFirst(last_command);
 		}
 	}
 	return c;
@@ -177,21 +205,6 @@ void empty_stack(stack<char *> & s)
 	{
 		s.pop();
 	}
-}
-
-char * combine(stack<char*> s)
-{
-	//try combining all the char * then making them into
-	//char * [] in the constructor, appears to work here
-
-	char * temp = s.top();
-	s.pop();
-	while(!s.empty())
-	{
-		strcat(temp, s.top());
-		s.pop();	
-	}
-	return temp;
 }
 
 void stack_print(stack<char *> s)

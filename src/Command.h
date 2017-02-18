@@ -5,6 +5,8 @@
 #include <sys/types.h>
 #include <stack>
 #include <queue>
+#include <cstdlib>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -28,8 +30,8 @@ class Command: public Rshell
 		stack<char *> commands;
 		stack<char *> temp;
 		char * command;
-		char * args[100];
 		vector<char *> v;
+		char * args[100];
 
 		Command();
 		Command(stack<char *>s);
