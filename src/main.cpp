@@ -70,7 +70,6 @@ int main(int argc, char * argv[])
 			{
 				in.push(parsed);
 			}	
-			//in.push(parsed);
 			if (semicolon_bool)
 			{
 				in.push(semicolon_string);
