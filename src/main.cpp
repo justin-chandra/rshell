@@ -25,6 +25,7 @@ void empty_stack(stack<char *> & s);
 
 int main(int argc, char * argv[])
 {	
+	//test
 	stack<char *> in;
 
 	queue<char *> qin;
