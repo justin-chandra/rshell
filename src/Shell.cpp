@@ -57,27 +57,46 @@ void Shell::execute()
 		char * parsed = strtok(input_cstring, " ");
 		while (parsed != NULL)
 		{
-			//cout << parsed << endl;
+			bool semi_colon_exists = false;
 			//looking for comment
 			if (parsed[0] == '#')
 			{
 				break;
 			}
 			//looking for ';'
-			if (parsed[sizeof(parsed) - 1] == ';')
+			for (unsigned i = 0; parsed[i] != '\0'; ++i)
+			{
+				if (parsed[i] == ';')
+				{
+					parsed[i] = '\0';
+					semi_colon_exists = true;
+					break;
+				}
+			}
+			/*
+			   if (parsed[sizeof(parsed) - 1] == ';')
+			   {
+			   string sc = ";";
+			   char * semicolon_string = new char[1];
+			   strcpy(semicolon_string, sc.c_str());
+			   parsed[sizeof(parsed) - 1] = '\0';
+			   in.push(parsed);
+			   in.push(semicolon_string);
+			   print(in);
+			   }
+			   else
+			   {
+			   in.push(parsed);
+			   }
+			   */
+			in.push(parsed);
+			if (semi_colon_exists)
 			{
 				string sc = ";";
 				char * semicolon_string = new char[1];
 				strcpy(semicolon_string, sc.c_str());
-				parsed[sizeof(parsed) - 1] = '\0';
-				in.push(parsed);
 				in.push(semicolon_string);
 			}
-			else
-			{
-				in.push(parsed);
-			}
-
 			parsed = strtok(NULL, " ");
 		}
 		connectors = build(in);
