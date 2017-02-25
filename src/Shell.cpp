@@ -57,6 +57,32 @@ void Shell::execute()
 		char * parsed = strtok(input_cstring, " ");
 		while (parsed != NULL)
 		{
+			//looking for paren
+			if (parsed[0] == '(')
+			{
+				unsigned j = 0;
+				for (unsigned i = 1; parsed[i] != '\0'; ++i)
+				{
+					parsed[i - 1] = parsed[i];
+					j = i;
+				}
+				parsed[j] = '\0';
+				string op = "(";
+				char * open_paren = new char[1];
+				strcpy(open_paren, op.c_str());			
+				in.push(open_paren);
+			}
+
+			bool insert_closing_paren = false;
+			for (unsigned i = 0; parsed[i] != '\0'; ++i)
+			{
+				if (parsed[i] == ')')
+				{
+					parsed[i] = '\0';
+					insert_closing_paren = true;
+					break;
+				}
+			}
 			bool semi_colon_exists = false;
 			//looking for comment
 			if (parsed[0] == '#')
@@ -73,22 +99,8 @@ void Shell::execute()
 					break;
 				}
 			}
-			/*
-			   if (parsed[sizeof(parsed) - 1] == ';')
-			   {
-			   string sc = ";";
-			   char * semicolon_string = new char[1];
-			   strcpy(semicolon_string, sc.c_str());
-			   parsed[sizeof(parsed) - 1] = '\0';
-			   in.push(parsed);
-			   in.push(semicolon_string);
-			   print(in);
-			   }
-			   else
-			   {
-			   in.push(parsed);
-			   }
-			   */
+			
+			//inserts the ending characters
 			in.push(parsed);
 			if (semi_colon_exists)
 			{
@@ -96,6 +108,14 @@ void Shell::execute()
 				char * semicolon_string = new char[1];
 				strcpy(semicolon_string, sc.c_str());
 				in.push(semicolon_string);
+			}
+			
+			if (insert_closing_paren)
+			{
+				string cp = ")";
+				char * cp_string = new char[1];
+				strcpy(cp_string, cp.c_str());
+				in.push(cp_string);
 			}
 			parsed = strtok(NULL, " ");
 		}
@@ -140,6 +160,8 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 	string or_string = "||";
 	string always_string = ";";
 	string comment_string = "#";
+	string closing_paren = ")";
+	string opening_paren = "(";
 
 	stack<char *> temp_stack;	
 
@@ -150,26 +172,21 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 		s.pop();
 
 		//ending parens
-		if (temp[sizeof(temp) - 1] == ')')
+		if (temp == closing_paren)
 		{
-			temp[sizeof(temp) - 1] = '\0';
-			//make queue to proceess parens
 			queue<char *> q;
-			q.push(temp);
-			temp = s.top();
-			while (temp[0] != '(' && !s.empty())
+			temp_stack.pop();
+			while (temp != opening_paren || !s.empty())
 			{
 				temp = s.top();
 				s.pop();
-				q.push(temp);
+				if (temp != opening_paren && temp != closing_paren)
+				{
+					q.push(temp);
+				}
 			}
-			//removing last paren (
-			char * last = new char[sizeof(temp) - 1];
-			for (unsigned i = 1; temp[i] != '\0'; ++i)
-			{
-				last[i - 1] = temp[i];
-			}
-			q.push(last);
+			print(q);
+			/*
 			Rshell * set_of_parens = build_parens(q);
 
 			//attach the parens to connector
@@ -197,6 +214,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			{
 				break;
 			}
+			*/
 		}
 		else
 		{
@@ -306,14 +324,26 @@ Rshell * Shell::build_parens(queue<char *> & q)
 	return root;
 }
 
+void Shell::print(queue<char *> q)
+{
+	cout << "Start Print: ";
+	while (!q.empty())
+	{
+		cout << q.front() << " ";
+		q.pop();
+	}
+	cout << " :End Print" << endl;
+}
+
 void Shell::print(stack<char *> s)
 {
-	cout << "printing" << endl;
+	cout << "Start Print: ";
 	while (!s.empty())
 	{
-		cout << s.top() << endl;
+		cout << s.top() << " ";
 		s.pop();
 	}
+	cout << " : End of Print" << endl;
 }
 
 void Shell::empty_stack(stack<char *> & s)

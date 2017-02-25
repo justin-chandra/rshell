@@ -27,6 +27,7 @@ class Shell
 	//helpers
 	void empty_stack(stack<char *> &s);
 	void print(stack<char *> s);
+	void print(queue<char *> q);
 
 };
 
