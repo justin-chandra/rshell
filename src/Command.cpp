@@ -53,6 +53,7 @@ bool Command::evaluate()
 	if (child_pid < 0)
 	{
 		perror("fork failure");
+		return true;
 	}
 	else if (child_pid == 0)
 	{
@@ -65,17 +66,22 @@ bool Command::evaluate()
 			_exit(1); 
 		}
 	}
-	else if (child_pid > 0)
+	else 
 	{
 		//handles exit status and wait error
-		if (waitpid(child_pid, &status, 0) == -1)
+		if (waitpid(child_pid, &status, WUNTRACED) == 1)
 		{
 			perror("wait failed");
 		}
-		if (WEXITSTATUS(status) != 0)
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+
 		{
-			return false;
+			if (waitpid(child_pid, &status, WUNTRACED) == 1)
+			{
+				perror("wait failed");
+			}
 		}
+		return status;
 	}
 	return true;
 }

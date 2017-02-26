@@ -136,10 +136,9 @@ Rshell * Shell::build_tree(vector<Rshell *> & v)
 	if (!v.empty())
 	{
 		root = v.back();
-		temp = root;
+		//temp = root;
 		v.pop_back();
 	}
-
 	while(!v.empty())
 	{
 		temp = v.back();
@@ -176,7 +175,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 		{
 			queue<char *> q;
 			temp_stack.pop();
-			while (temp != opening_paren || !s.empty())
+			while (temp != opening_paren)
 			{
 				temp = s.top();
 				s.pop();
@@ -185,43 +184,51 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 					q.push(temp);
 				}
 			}
-			print(q);
-			/*
+			//print(q);
 			Rshell * set_of_parens = build_parens(q);
-
 			//attach the parens to connector
-			temp = s.top();
-			s.pop();
+			
+			if (!s.empty())
+			{
+				temp = s.top();
+				s.pop();
+			}
 			if (temp == and_string)
 			{
 				Rshell * _and_ = new And();
-				_and_->setSecond(set_of_parens);
+				//_and_->setSecond(set_of_parens);
 				connectors.push_back(_and_);
 			}
 			else if (temp == or_string)
 			{
 				Rshell * _or_ = new Or();
-				_or_->setSecond(set_of_parens);
+				//_or_->setSecond(set_of_parens);
 				connectors.push_back(_or_);
 			}
 			else if (temp == always_string)
 			{
 				Rshell * _always_ = new Always();
-				_always_->setSecond(set_of_parens);
+				//_always_->setSecond(set_of_parens);
 				connectors.push_back(_always_);
 			}
 			else if(temp == comment_string)
 			{
 				break;
 			}
-			*/
+			else
+			{
+				connectors.push_back(set_of_parens);
+			}
+			//print(s);
 		}
 		else
 		{
+			//print(temp_stack);
 			if (temp == and_string)
 			{
 				temp_stack.pop();
 				Rshell * _and = new And(temp_stack);
+				//print(temp_stack);
 				connectors.push_back(_and);
 				empty_stack(temp_stack);
 			}
@@ -229,12 +236,14 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			{
 				temp_stack.pop();
 				Rshell * _or = new Or(temp_stack);
+				//print(temp_stack);
 				connectors.push_back(_or);
 				empty_stack(temp_stack);
 			}
 			else if (temp == always_string)
 			{
 				temp_stack.pop();
+				//print(temp_stack);
 				Rshell * _always = new Always(temp_stack);
 				connectors.push_back(_always);
 				empty_stack(temp_stack);
@@ -256,10 +265,11 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 		else if (!connectors.empty())
 		{
 			Command * last_command = new Command(temp_stack);
-			connectors.back()->setFirst(last_command);
+			//connectors.back()->setFirst(last_command);
+			connectors.at(connectors.size() - 1)->setFirst(last_command);
 		}
 	}
-
+	//cout << "Size of connectors: " << connectors.size() << endl;
 	return connectors;
 }
 

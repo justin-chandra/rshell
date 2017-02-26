@@ -35,22 +35,36 @@ And::~And()
 
 }
 
+/*
+   bool And::evaluate()
+   {
+//evaluates left and right children
+if (first->evaluate() == true) 
+{
+second->evaluate();
+status = true;
+return true;
+}
+else
+{
+status = false;
+return false;
+}	
+
+return true;
+}
+*/
+
 bool And::evaluate()
 {
-	//evaluates left and right children
-	if (first->evaluate() == true) 
+	if (first->evaluate())
 	{
-		second->evaluate();
-		status = true;
 		return true;
 	}
 	else
 	{
-		status = false;
-		return false;
+		return second->evaluate();
 	}	
-
-	return true;
 }
 
 //returns parent
