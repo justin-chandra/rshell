@@ -12,6 +12,7 @@ using namespace std;
 
 #include "Rshell.h"
 #include "Connector.h"
+#include "Shell.h"
 
 #include "And.h"
 #include "Or.h"
@@ -25,6 +26,10 @@ void empty_stack(stack<char *> & s);
 
 int main(int argc, char * argv[])
 {	
+	Shell * s = new Shell();
+	s->execute();
+	/*
+	//test
 	stack<char *> in;
 
 	queue<char *> qin;
@@ -70,7 +75,6 @@ int main(int argc, char * argv[])
 			{
 				in.push(parsed);
 			}	
-			//in.push(parsed);
 			if (semicolon_bool)
 			{
 				in.push(semicolon_string);
@@ -119,6 +123,7 @@ int main(int argc, char * argv[])
 		}
 		delete [] cstring;
 	}
+	*/
 	return 0;
 }
 

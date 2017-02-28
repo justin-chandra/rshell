@@ -28,7 +28,7 @@ Always::~Always()
 
 }
 
-bool Always::evaluate(0) 
+bool Always::evaluate() 
 {
 	//and this...evaluates the children
 	first->evaluate();

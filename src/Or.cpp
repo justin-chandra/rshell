@@ -28,6 +28,7 @@ Or::~Or()
 
 }
 
+/*
 bool Or::evaluate()
 {
 	//evaluates children
@@ -44,6 +45,19 @@ bool Or::evaluate()
 	}	
 
 	return true;
+}
+*/
+
+bool Or::evaluate()
+{
+	if (first->evaluate())
+	{
+		return second->evaluate();
+	}
+	else
+	{
+		return false;
+	}
 }
 
 //returns the parent

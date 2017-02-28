@@ -1,7 +1,7 @@
 CC=g++
 CC_FLAGS=-Wall -Werror -ansi -pedantic
 
-all: And Command Connector Or Always main
+all: And Command Connector Or Always Shell main
 	
 Always:
 	mkdir -p bin
@@ -18,6 +18,10 @@ Command:
 Connector:
 	mkdir -p bin
 	$(CC) -c $(CC_FLAGS) src/Connector.cpp -o bin/Connector.o
+
+Shell:
+	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/Shell.cpp -o bin/Shell.o
 
 main: 
 	mkdir -p bin

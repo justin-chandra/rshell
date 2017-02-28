@@ -1,0 +1,2 @@
+(ls && echo a) || (ls -l || who)
+exit

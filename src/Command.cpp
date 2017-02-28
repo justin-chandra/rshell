@@ -52,7 +52,8 @@ bool Command::evaluate()
 	//forks the current process to execute additional processes
 	if (child_pid < 0)
 	{
-		cout << "Fork failed in: " << endl << "bool Command::evaluate()" << endl;
+		perror("fork failure");
+		return true;
 	}
 	else if (child_pid == 0)
 	{
@@ -60,21 +61,27 @@ bool Command::evaluate()
 		char ** vloc = &v[0];
 		if (execvp(v.at(0), vloc) == -1)
 		{
-			cout << "-rshell: " << v.at(0) << ": command not found" << endl;
+			//cout << "-rshell: " << v.at(0) << ": command not found" << endl;
+			perror("execvp");
 			_exit(1); 
 		}
 	}
-	else if (child_pid > 0)
+	else 
 	{
 		//handles exit status and wait error
-		if (waitpid(child_pid, &status, 0) == -1)
+		if (waitpid(child_pid, &status, WUNTRACED) == 1)
 		{
-			//cout << "wait error" << endl;
+			perror("wait failed");
 		}
-		if (WEXITSTATUS(status) != 0)
+		while (!WIFEXITED(status) && !WIFSIGNALED(status))
+
 		{
-			return false;
+			if (waitpid(child_pid, &status, WUNTRACED) == 1)
+			{
+				perror("wait failed");
+			}
 		}
+		return status;
 	}
 	return true;
 }
