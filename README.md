@@ -16,16 +16,6 @@ Note: Running the rshell within the rshell is not recommended, as it can lead to
 ```
  echo lorem && #ipsum
 ```
-  
-##execvp code snippet:  
-```c++
-char ** vloc = &v[0];
-if (execvp(v.at(0), vloc) == -1)
-{	
-	cout << "-rshell: " << v.at(0) << ": command not found" << endl;
-	_exit(1); 
-}
-```  
 ##UML Diagram:  
   
 ![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/download.png) 
