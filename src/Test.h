@@ -2,6 +2,9 @@
 #include <stack>
 #include <string>
 #include <queue>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 using namespace std;
 

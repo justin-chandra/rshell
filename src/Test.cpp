@@ -1,7 +1,10 @@
 #include <iostream>
 #include "Test.h"
 #include "Command.h"
-//note to self: includ sys call libraries
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 //use p error to figure out if the stat call works or not
 
 using namespace std;
@@ -24,7 +27,7 @@ Test::Test(Rshell *r)
 //new constructor not in any other class
 Test::Test(vector<char *> v)
 {
-	
+	this->v = v;	
 }
 
 Test::Test(stack<char *>s)
@@ -47,6 +50,41 @@ Test::~Test()
 //must be able to call that stat linux command
 bool Test::evaluate()
 {
+	struct stat sb;
+	
+	if(stat(v, &sb)==-1)
+	{
+		perror("stat");
+	}
+
+	if((sb.st_mode & S_ISDR))
+	{
+		//BREAK HERE TO CHECK
+		cout << "(True)" << endl;
+		cout << "Temporary cout: Is directory." << endl;
+		return true;	
+	}
+
+	else
+	{
+		cout << "(False)" << endl;
+		cout << "Temporary cout: Is not directory." << endl;
+		return false;
+	}
+
+	if((sb.st_mode & S_ISREG))
+	{
+		cout << "(True)" << endl;
+		cout << "Temporary cout: Is a regular file." << endl;
+		return true;
+	}
+
+	else
+	{
+		cout << "(False)" << endl;
+		cout << "Temporary cout: Is not a regular file." << endl;
+		return false;
+	}
 	
 }
 
