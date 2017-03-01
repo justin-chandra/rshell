@@ -51,108 +51,72 @@ Test::~Test()
 
 }
 
-//modified/different compared to other classes
-//must be able to call that stat linux command
 bool Test::evaluate()
 {
-	struct stat sb;
-	char * c = NULL;
-	//change it for default flag, also picking the argument
-	if (v.size() == 3)
-	{
-		c = v.at(2);
-	}
-	else if (v.size() == 2)
-	{
-		c = v.at(1);
-	}
-	//what's been given in vector v is the command line argument
-	//you only need the path file/stuff that comes after the flag
-	//you need to make a char * that is the path to the file/directory you're checking
-	//get the flag, and set it according to the second index of the command line argument
-	//is v.(0) == test?
-	//otherwise if symbols, you can knock off brackets
-	//you need char * c to = the path/v.at(2)
-
-	stat(c, &sb);	
-
-	string testString = "test";
-	string openingBracket = "[";
 	string dashE = "-e";
 	string dashF = "-f";
 	string dashD = "-d";
 
-	//change it so that test without a tag
+	struct stat sb;
+	char * c = NULL;
 
-	if (v.at(0) == testString || v.at(0) == openingBracket)
+	//decides the flag
+	if (v.size() > 3)
 	{
+		c = v.at(2);
 		if (v.at(1) == dashE)
 		{
-			if (S_ISDIR(sb.st_mode) || S_ISREG(sb.st_mode))
-			{
-				//BREAK HERE TO CHECK
-				cout << "(True)" << endl;
-				return true;	
-			}
+			e = true;
 		}
-
-		if (v.at(1) == dashF)
+		else if (v.at(1) == dashF)
 		{
-			if (S_ISREG(sb.st_mode))
-			{
-				cout << "(True)" << endl;
-				return true;
-			}
-
+			f = true;
 		}
-
-		if (v.at(1) == dashD)
+		else if (v.at(1) == dashD)
 		{
-			if (S_ISDIR(sb.st_mode))
-			{
-				cout << "(True)" << endl;
-				return true;
-			}
+			d = true;
+		}
+	}
+	else if (v.size() == 3)
+	{
+		c = v.at(1);
+		e = true;
+	}
+	else
+	{
+		cout << "(False)" << endl;
+		return false;
+	}
+	
+	stat(c, &sb);	
+
+	//assigns the actual tag
+	if (e)
+	{
+		if (S_ISDIR(sb.st_mode) || S_ISREG(sb.st_mode))
+		{
+			cout << "(True)" << endl;
+			return true;	
+		}
+	}
+	else if (f)
+	{
+		if (S_ISREG(sb.st_mode))
+		{
+			cout << "(True)" << endl;
+			return true;
+		}
+	}
+	else if (d)
+	{
+		if (S_ISDIR(sb.st_mode))
+		{
+			cout << "(True)" << endl;
+			return true;
 		}
 	}
 	cout << "(False)" << endl;
 	return false;
-
-
-	/*	if (stat(c, &sb) == -1)
-		{
-		perror("stat");
-		return false;
-		}
-		*/
-	/*
-	   if (e)
-	   {
-	   if (S_ISDIR(sb.st_mode) || S_ISREG(sb.st_mode))
-	   {
-	//BREAK HERE TO CHECK
-	cout << "(True)" << endl;
-	return true;	
-	}
-	}
-	else if (f)
-	{
-	if (S_ISREG(sb.st_mode))
-	{
-	cout << "(True)" << endl;
-	return true;
-	}
-	}
-	else if (d)
-	{
-	if (S_ISDIR(sb.st_mode))
-	{
-	cout << "(True)" << endl;
-	return true;
-	}
-	}
-	return false;
-	*/
 }
 
 //returns parent, sets parent, first, and second
