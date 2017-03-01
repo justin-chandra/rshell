@@ -56,7 +56,16 @@ Test::~Test()
 bool Test::evaluate()
 {
 	struct stat sb;
-	char * c = v.at(2);
+	char * c = NULL;
+	//change it for default flag, also picking the argument
+	if (v.size() == 3)
+	{
+		c = v.at(2);
+	}
+	else if (v.size() == 2)
+	{
+		c = v.at(1);
+	}
 	//what's been given in vector v is the command line argument
 	//you only need the path file/stuff that comes after the flag
 	//you need to make a char * that is the path to the file/directory you're checking
@@ -72,7 +81,7 @@ bool Test::evaluate()
 	string dashE = "-e";
 	string dashF = "-f";
 	string dashD = "-d";
-	
+
 	//change it so that test without a tag
 
 	if (v.at(0) == testString || v.at(0) == openingBracket)
@@ -94,7 +103,7 @@ bool Test::evaluate()
 				cout << "(True)" << endl;
 				return true;
 			}
-	
+
 		}
 
 		if (v.at(1) == dashD)
@@ -105,43 +114,42 @@ bool Test::evaluate()
 				return true;
 			}
 		}
-
 	}
 	cout << "(False)" << endl;
 	return false;
 
 
-/*	if (stat(c, &sb) == -1)
-	{
+	/*	if (stat(c, &sb) == -1)
+		{
 		perror("stat");
 		return false;
-	}
-*/
-/*
-	if (e)
-	{
-		if (S_ISDIR(sb.st_mode) || S_ISREG(sb.st_mode))
-		{
-			//BREAK HERE TO CHECK
-			cout << "(True)" << endl;
-			return true;	
 		}
+		*/
+	/*
+	   if (e)
+	   {
+	   if (S_ISDIR(sb.st_mode) || S_ISREG(sb.st_mode))
+	   {
+	//BREAK HERE TO CHECK
+	cout << "(True)" << endl;
+	return true;	
+	}
 	}
 	else if (f)
 	{
-		if (S_ISREG(sb.st_mode))
-		{
-			cout << "(True)" << endl;
-			return true;
-		}
+	if (S_ISREG(sb.st_mode))
+	{
+	cout << "(True)" << endl;
+	return true;
+	}
 	}
 	else if (d)
 	{
-		if (S_ISDIR(sb.st_mode))
-		{
-			cout << "(True)" << endl;
-			return true;
-		}
+	if (S_ISDIR(sb.st_mode))
+	{
+	cout << "(True)" << endl;
+	return true;
+	}
 	}
 	return false;
 	*/

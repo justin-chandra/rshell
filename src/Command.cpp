@@ -55,8 +55,13 @@ bool Command::evaluate()
 	string e = "-e";
 	string f = "-f";
 	string d = "-d";
-	if ((v.at(0) == test || v.at(0) == open_bracket) && v.size() >= 2)
+	if (v.at(0) == test || v.at(0) == open_bracket)
 	{
+		if (v.size() == 2)
+		{
+			cout << "(False)" << endl;
+			return true;
+		}
 		Test * t = new Test(v);
 		if (t->evaluate())
 		{
