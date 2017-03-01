@@ -55,7 +55,7 @@ bool Command::evaluate()
 	string e = "-e";
 	string f = "-f";
 	string d = "-d";
-	if (v.at(0) == test || v.at(0) == open_bracket)
+	if ((v.at(0) == test || v.at(0) == open_bracket) && v.size() >= 2)
 	{
 		Test * t = new Test(v);
 		if (t->evaluate())

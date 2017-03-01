@@ -64,18 +64,16 @@ bool Test::evaluate()
 	//is v.(0) == test?
 	//otherwise if symbols, you can knock off brackets
 	//you need char * c to = the path/v.at(2)
-	
-	if (stat(c, &sb) == -1)
-	{
-		perror("stat");
-		return false;
-	}
-	
+
+	stat(c, &sb);	
+
 	string testString = "test";
 	string openingBracket = "[";
 	string dashE = "-e";
 	string dashF = "-f";
 	string dashD = "-d";
+	
+	//change it so that test without a tag
 
 	if (v.at(0) == testString || v.at(0) == openingBracket)
 	{
