@@ -16,6 +16,9 @@ Class Test: public Connector
 		Test(Rshell *, Rshell*)
 		Test(Rshell *)
 		Test(stack<char *>s);
+		
+		Test(vector<char *>v);		
+
 		Test();
 		~Test();
 
@@ -25,6 +28,8 @@ Class Test: public Connector
 		string userInput;
 		bool status;
 		
+		vector<char *> v;
+
 		bool evaluate();
 		
 		Rshell * getParent();
@@ -32,7 +37,6 @@ Class Test: public Connector
 		void setParent(Rshell *);
 		void setFirst(Rshell *);
 		void setSecond(Rshell *);
-
 }
 
 #endif
