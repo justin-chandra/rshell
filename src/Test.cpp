@@ -58,6 +58,13 @@ bool Test::evaluate()
 	struct stat sb;
 	char * c = new char[v.size()];
 	
+	//what's been given in vector v is the command line argument
+	//you only need the path file/stuff that comes after the flag
+	//you need to make a char * that is the path to the file/directory you're checking
+	//get the flag, and set it according to the second index of the command line argument
+	//is v.(0) == test?
+	//otherwise if symbols, you can knock off brackets
+	//you need char * c to = the path/v.at(2)
 	if(stat(c, &sb)== -1)
 	{
 		perror("stat");
