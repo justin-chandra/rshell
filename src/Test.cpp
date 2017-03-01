@@ -57,33 +57,37 @@ bool Test::evaluate()
 {
 	struct stat sb;
 	char * c = new char[v.size()];
+	
 	if(stat(c, &sb)== -1)
 	{
 		perror("stat");
+		return false;
 	}
 
-	if (S_ISDIR(sb.st_mode) && S_ISREG(sb.st_mode))
+	if (e)
 	{
-		cout << "(True)" << endl;
-		return true;
+		if(S_ISDIR(sb.st_mode) || S_ISREG(sb.st_mode))
+		{
+			//BREAK HERE TO CHECK
+			cout << "(True)" << endl;
+			return true;	
+		}
 	}
-	else if(S_ISDIR(sb.st_mode))
+	else if (f)
 	{
-		//BREAK HERE TO CHECK
-		cout << "(True)" << endl;
-		cout << "Temporary cout: Is directory." << endl;
-		return true;	
+		if (S_ISREG(sb.st_mode))
+		{
+			cout << "(True)" << endl;
+			return true;
+		}
 	}
-	else if(S_ISREG(sb.st_mode))
+	else if (d)
 	{
-		cout << "(True)" << endl;
-		cout << "Temporary cout: Is a regular file." << endl;
-		return true;
-	}
-	else
-	{
-		cout << "(False)" << endl;
-		return false;
+		if (S_ISDIR(sb.st_mode))
+		{
+			cout << "(True)" << endl;
+			return true;
+		}
 	}
 	return false;
 }

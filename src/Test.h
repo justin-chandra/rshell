@@ -45,6 +45,9 @@ class Test: public Rshell
 		Rshell * parent;
 		string userInput;
 		bool status;
+		bool e;
+		bool f;
+		bool d;
 		
 		vector<char *> v;
 
