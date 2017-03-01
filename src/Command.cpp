@@ -48,6 +48,19 @@ bool Command::evaluate()
 			_exit(1);
 		}
 	}
+	
+	string test = "test";
+	string open_bracket = "[";
+	string e = "-e";
+	string f = "-f";
+	string d = "-d";
+	if (v.at(0) == test || v.at(i) == open_bracket)
+	{
+		Test t = new Test();
+		return t->evaluate();
+	}
+
+	//execvp stuff
 	pid_t child_pid = fork();
 	//forks the current process to execute additional processes
 	if (child_pid < 0)

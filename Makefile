@@ -11,6 +11,10 @@ And:
 	mkdir -p bin
 	$(CC) -c $(CC_FLAGS) src/And.cpp -o bin/And.o
 
+Test:
+	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/Test.cpp -o bin/Test.o
+
 Command:
 	mkdir -p bin
 	$(CC) -c $(CC_FLAGS) src/Command.cpp -o bin/Command.o

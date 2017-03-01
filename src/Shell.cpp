@@ -136,7 +136,6 @@ Rshell * Shell::build_tree(vector<Rshell *> & v)
 	if (!v.empty())
 	{
 		root = v.back();
-		//temp = root;
 		v.pop_back();
 	}
 	while(!v.empty())
