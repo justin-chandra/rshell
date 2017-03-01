@@ -1,11 +1,17 @@
 #include <iostream>
-#include "Test.h"
-#include "Command.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <stdio.h>
+#include <vector>
+#include <string>
+#include <pwd.h>
+#include <string.h>
+#include <errno.h>
+#include <stdlib.h>
 
-//use p error to figure out if the stat call works or not
+#include "Test.h"
+#include "Rshell.h"
 
 using namespace std;
 
@@ -32,8 +38,7 @@ Test::Test(vector<char *> v)
 
 Test::Test(stack<char *>s)
 {
-	Command * c = new Command(s);
-	this->second = c;
+
 }
 
 Test::Test()
@@ -51,41 +56,36 @@ Test::~Test()
 bool Test::evaluate()
 {
 	struct stat sb;
-	
-	if(stat(v, &sb)==-1)
+	char * c = new char[v.size()];
+	if(stat(c, &sb)== -1)
 	{
 		perror("stat");
 	}
 
-	if((sb.st_mode & S_ISDR))
+	if (S_ISDIR(sb.st_mode) && S_ISREG(sb.st_mode))
+	{
+		cout << "(True)" << endl;
+		return true;
+	}
+	else if(S_ISDIR(sb.st_mode))
 	{
 		//BREAK HERE TO CHECK
 		cout << "(True)" << endl;
 		cout << "Temporary cout: Is directory." << endl;
 		return true;	
 	}
-
-	else
-	{
-		cout << "(False)" << endl;
-		cout << "Temporary cout: Is not directory." << endl;
-		return false;
-	}
-
-	if((sb.st_mode & S_ISREG))
+	else if(S_ISREG(sb.st_mode))
 	{
 		cout << "(True)" << endl;
 		cout << "Temporary cout: Is a regular file." << endl;
 		return true;
 	}
-
 	else
 	{
 		cout << "(False)" << endl;
-		cout << "Temporary cout: Is not a regular file." << endl;
 		return false;
 	}
-	
+	return false;
 }
 
 //returns parent, sets parent, first, and second

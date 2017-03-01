@@ -13,6 +13,7 @@ using namespace std;
 
 #include "Rshell.h"
 #include "Command.h"
+#include "Test.h"
 
 Command::Command()
 {
@@ -54,9 +55,9 @@ bool Command::evaluate()
 	string e = "-e";
 	string f = "-f";
 	string d = "-d";
-	if (v.at(0) == test || v.at(i) == open_bracket)
+	if (v.at(0) == test || v.at(0) == open_bracket)
 	{
-		Test t = new Test();
+		Test * t = new Test(v);
 		return t->evaluate();
 	}
 

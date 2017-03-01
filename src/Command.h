@@ -14,6 +14,7 @@ using namespace std;
 #include "And.h"
 #include "Or.h"
 #include "Always.h"
+#include "Test.h"
 
 
 #ifndef Command_H

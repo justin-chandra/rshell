@@ -1,7 +1,7 @@
 CC=g++
 CC_FLAGS=-Wall -Werror -ansi -pedantic
 
-all: And Command Connector Or Always Shell main
+all: And Test Command Connector Or Always Shell main
 	
 Always:
 	mkdir -p bin
