@@ -58,7 +58,11 @@ bool Command::evaluate()
 	if (v.at(0) == test || v.at(0) == open_bracket)
 	{
 		Test * t = new Test(v);
-		return t->evaluate();
+		if (t->evaluate())
+		{
+			return false;
+		}
+		return true;
 	}
 
 	//execvp stuff

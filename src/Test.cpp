@@ -57,7 +57,6 @@ bool Test::evaluate()
 {
 	struct stat sb;
 	char * c = v.at(2);
-	
 	//what's been given in vector v is the command line argument
 	//you only need the path file/stuff that comes after the flag
 	//you need to make a char * that is the path to the file/directory you're checking
@@ -110,7 +109,7 @@ bool Test::evaluate()
 		}
 
 	}
-
+	cout << "(False)" << endl;
 	return false;
 
 
