@@ -34,6 +34,9 @@ Test::Test(Rshell *r)
 Test::Test(vector<char *> v)
 {
 	this->v = v;	
+	e = false;
+	d = false;
+	f = false;
 }
 
 Test::Test(stack<char *>s)
@@ -56,36 +59,76 @@ bool Test::evaluate()
 	string dashE = "-e";
 	string dashF = "-f";
 	string dashD = "-d";
+	string open_bracket = "[";
+	string test = "test";
 
 	struct stat sb;
 	char * c = NULL;
 
 	//decides the flag
-	if (v.size() > 3)
-	{
-		c = v.at(2);
-		if (v.at(1) == dashE)
-		{
-			e = true;
-		}
-		else if (v.at(1) == dashF)
-		{
-			f = true;
-		}
-		else if (v.at(1) == dashD)
-		{
-			d = true;
-		}
-	}
-	else if (v.size() == 3)
-	{
-		c = v.at(1);
-		e = true;
-	}
-	else
+	if (v.size() == 0)
 	{
 		cout << "(False)" << endl;
 		return false;
+	}
+	if (v.at(0) == open_bracket)
+	{
+		if (v.size() == 5)
+		{
+			c = v.at(2);
+			if (v.at(1) == dashE)
+			{
+				e = true;
+			}
+			else if (v.at(1) == dashF)
+			{
+				f = true;
+			}
+			else if (v.at(1) == dashD)
+			{
+				d = true;
+			}
+		}
+		else if (v.size() == 4)
+		{
+			c = v.at(1);
+			e = true;
+		}
+		else 
+		{
+			cout << "(False)" << endl;
+			return false;
+		}
+	}
+	else if (v.at(0) == test)
+	{
+		if (v.size() == 4)
+		{
+			c = v.at(2);
+			if (v.at(1) == dashE)
+			{
+				e = true;
+			}
+			else if (v.at(1) == dashF)
+			{
+				f = true;
+			}
+			else if (v.at(1) == dashD)
+			{
+				d = true;
+			}
+		}
+		else if (v.size() == 3)
+		{
+			c = v.at(1);
+			e = true;
+		}
+		else
+		{
+			cout << "test else" << endl;
+			cout << "(False)" << endl;
+			return false;
+		}
 	}
 	
 	stat(c, &sb);	
