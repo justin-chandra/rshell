@@ -125,7 +125,6 @@ bool Test::evaluate()
 		}
 		else
 		{
-			cout << "test else" << endl;
 			cout << "(False)" << endl;
 			return false;
 		}

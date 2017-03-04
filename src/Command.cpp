@@ -55,7 +55,7 @@ bool Command::evaluate()
 	string e = "-e";
 	string f = "-f";
 	string d = "-d";
-	if (v.at(0) == test || v.at(0) == open_bracket)
+	if (v.at(0) == test)
 	{
 		Test * t = new Test(v);
 		if (t->evaluate())
@@ -63,6 +63,18 @@ bool Command::evaluate()
 			return false;
 		}
 		return true;
+	}
+	else if (v.at(0) == open_bracket)
+	{
+		if (v.size() > 3)
+		{
+			Test * t = new Test(v);
+			if (t->evaluate())
+			{
+				return false;
+			}
+			return true;
+		}
 	}
 
 	//execvp stuff
