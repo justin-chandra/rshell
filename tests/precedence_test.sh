@@ -1,2 +1,2 @@
 #!/bin/sh
-../bin/rshell < precedencetests
+../bin/rshell < precedencetest
