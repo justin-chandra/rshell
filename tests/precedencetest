@@ -1,2 +1,10 @@
 (ls && echo a) || (ls -l || who)
+(cd src && echo lorem ipsum) || (who && echo do, a deer)
+(echo a female deer) && (echo re, a drop of golden sun)
+(who && echo mi, a name I call myself) && ([ tests ] && echo fa, a long long way to ruuun!)
+() || (echo so, a needle pulling thread) && (echo la, a note to follow so)
+(echo ti, a drink with jam and bread) || (echo that will bring us back to 'do'!)
+
+
+
 exit

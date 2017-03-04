@@ -29,3 +29,30 @@ touch exit
 uname exit
 exit who && uname && times
 
+[ -f src ] || exit
+[ -d src ] && exit
+
+test -e src/And.cpp && echo "And.cpp exists" && exit
+test -f src/And.cpp && exit
+test -d src/And.cpp || exit
+
+test -e tests && echo "tests exists" || exit
+test -f tests || echo "this is not a file" && exit
+test -d test && echo "tests is an existing directory" || exit
+
+[ src ] && echo Hello, Patrick! && exit
+[ -e src ] && echo Hello, Patrick! && exit
+[ -f src ] && echo Hello, Patrick! && exit
+[ -d src ] && echo Hello, Patrick! && exit
+
+[ test ] || echo  Hello, Patrick! && exit
+[ test ] && echo Hello, Patrick! && exit
+[ tests ] || echo Hello, Patrick! && exit
+[ tests ] && echo Hello, Patrick! && exit
+
+[ -f test ] || echo  Hello, Patrick! && exit
+[ -d test ] && echo Hello, Patrick! && exit
+[ -f tests ] || echo Hello, Patrick! && exit
+[ -d tests ] && echo Hello, Patrick! && exit
+
+
