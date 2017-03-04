@@ -22,12 +22,10 @@ Note: Running the rshell within the rshell is not recommended, as it can lead to
 ```  
 lorem;ipsum;dolor
 ```  
-  
-##UML Diagram:  
-  
-![alt tag] (https://github.com/justin-chandra/rshell/blob/exec/images/download.png) 
-
-
+* Executing a test command is nested within multiple sets of parentheses, it will result in a segmentation fault. Example:
+```
+(((test -e src)))
+``` 
 
 ##Authors:  
 J. Chandra  
