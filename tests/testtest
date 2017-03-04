@@ -1,0 +1,33 @@
+[ -e src/Command.h ]
+[ -f src/Command.h ]
+[ -d src/Command.h ]
+
+[ -e src ]
+[ -f src ]
+[ -d src ]
+
+test -e src/And.cpp
+test -f src/And.cpp
+test -d src/And.cpp
+
+test -e tests
+test -f tests
+test -d tests
+
+[ src ] && echo Hello, Patrick!
+[ -e src ] && echo Hello, Patrick!
+[ -f src ] && echo Hello, Patrick!
+[ -d src ] && echo Hello, Patrick!
+
+[ test ] || echo  Hello, Patrick!
+[ test ] && echo Hello, Patrick!
+[ tests ] || echo Hello, Patrick!
+[ tests ] && echo Hello, Patrick!
+
+[ -f test ] || echo  Hello, Patrick!
+[ -d test ] && echo Hello, Patrick!
+[ -f tests ] || echo Hello, Patrick!
+[ -d tests ] && echo Hello, Patrick!
+
+
+exit
