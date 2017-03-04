@@ -6,13 +6,17 @@
 [ -f src ]
 [ -d src ]
 
-test -e src/And.cpp
-test -f src/And.cpp
-test -d src/And.cpp
+[ -e src ] && echo src exists
+[ -f src ] || exit
+[ -d src ] && exit
 
-test -e tests
-test -f tests
-test -d tests
+test -e src/And.cpp && echo "And.cpp exists"
+test -f src/And.cpp && echo "And.cpp is an existing file"
+test -d src/And.cpp || echo "And.cpp is not a directory"
+
+test -e tests && echo "tests exists"
+test -f tests || echo "this is not a file"
+test -d test && echo "tests is an existing directory"
 
 [ src ] && echo Hello, Patrick!
 [ -e src ] && echo Hello, Patrick!
