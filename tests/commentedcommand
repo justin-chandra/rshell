@@ -10,5 +10,16 @@ echo a # || echo b # || echo c #
 
 ls # -l
 
+[ -e src/Command.h ] && echo lorem ipsum #hi
+[ -f src/Command.h ] #hi && echo lorem ipsum
+[ -d src/Command.h ] #ho ho ho #ho ho ho
+
+[ -e src ] && echo src exists 
+[ -f src ] || (echo lorem ipsum && exit) #lorem ipsum
+([ -f src ] || echo lorem ipsum) && (echo do re mi || exit) #fa so la ti
+
+test -e src/And.cpp #doe, a deer && echo "And.cpp exists"
+#a female deer test -f src/And.cpp && echo "And.cpp is an existing file"
+test -d src/And.cpp #re, a drop of golden sun || echo "And.cpp is not a directory"
 
 exit
