@@ -6,7 +6,7 @@ Rshell imitates BASH, able to execute built in BASH commands.
 ##How to Use:  
 ```
 cd rshell/  
-git checkout hw2  
+git checkout hw3  
 make  
 ./bin/rshell  
 ```    
