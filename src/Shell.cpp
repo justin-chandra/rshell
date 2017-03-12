@@ -160,6 +160,10 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 	string comment_string = "#";
 	string closing_paren = ")";
 	string opening_paren = "(";
+	string pipe = "|";
+	string inputRedirect = "<";
+	string outputRedirectAppend = ">";
+	string outputRedirectOverwrite = ">>";
 
 	stack<char *> temp_stack;	
 
@@ -246,6 +250,22 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 				Rshell * _always = new Always(temp_stack);
 				connectors.push_back(_always);
 				empty_stack(temp_stack);
+			}
+			else if (temp == pipe)
+			{
+				cout << "found pipe" << endl;
+			}
+			else if (temp == inputRedirect)
+			{
+				cout << "found <" << endl;
+			}
+			else if (temp == outputRedirectAppend)
+			{
+				cout << "found >>" << endl;
+			}
+			else if (temp == outputRedirectOverwrite)
+			{
+				cout << "found >" << endl;
 			}
 			else if(temp == comment_string)
 			{
