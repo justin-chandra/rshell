@@ -36,6 +36,15 @@ Pipe::~Pipe()
 
 bool Pipe::evaluate()
 {
+	//change to have int in and int out parameters
+	//int in, out;
+	/*
+	   pipefd[0] is the read end of the pipe
+	   pipefd1[1] is the write end of the pipe
+	   */
+	
+	//finish operations (read/write)
+	//close(in/out);
 	return false;
 }
 

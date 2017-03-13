@@ -257,6 +257,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			}
 			else if (temp == inputRedirect)
 			{
+				print(temp_stack);
 				Rshell * inRedirect = new RedirectInput(temp_stack);
 				connectors.push_back(inRedirect);
 				empty_stack(temp_stack);
@@ -278,6 +279,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 
 	if (!temp_stack.empty())
 	{
+		//print(temp_stack);
 		if (connectors.empty())
 		{
 			Command * single_command = new Command(temp_stack);

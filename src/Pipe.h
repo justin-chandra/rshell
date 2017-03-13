@@ -2,6 +2,8 @@
 #include <stack>
 #include <string>
 #include <queue>
+#include <unistd.h>
+#include <fcntl.h>
 
 using namespace std;
 
