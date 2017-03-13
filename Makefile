@@ -1,7 +1,7 @@
 CC=g++
 CC_FLAGS=-Wall -Werror -ansi -pedantic
 
-all: And Test Command Connector Or Always Shell main
+all: And Test Command Connector Pipe RedirectInput OutputRedirectA OutputRedirectO Or Always Shell main
 	
 Always:
 	mkdir -p bin
@@ -22,6 +22,22 @@ Command:
 Connector:
 	mkdir -p bin
 	$(CC) -c $(CC_FLAGS) src/Connector.cpp -o bin/Connector.o
+
+Pipe:
+	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/Pipe.cpp -o bin/Pipe.o
+
+RedirectInput:
+	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/RedirectInput.cpp -o bin/RedirectInput.o
+
+OutputRedirectO:
+	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/OutputRedirectO.cpp -o bin/OutputRedirectO.o
+
+OutputRedirectA:
+	mkdir -p bin
+	$(CC) -c $(CC_FLAGS) src/OutputRedirectA.cpp -o bin/OutputRedirectA.o
 
 Shell:
 	mkdir -p bin

@@ -20,7 +20,7 @@ Pipe::Pipe(Rshell *r)
 
 Pipe::Pipe(stack<char *> s)
 {
-	Command * c = new COmmand(s);
+	Command * c = new Command(s);
 	this->second = c;
 }
 
@@ -36,7 +36,7 @@ Pipe::~Pipe()
 
 bool Pipe::evaluate()
 {
-
+	return false;
 }
 
 Rshell * Pipe::getParent()

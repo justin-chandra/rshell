@@ -6,6 +6,8 @@
 using namespace std;
 
 #include "Connector.h"
+#include "Command.h"
+
 #ifndef PIPE_H
 #define PIPE_H
 
@@ -19,7 +21,7 @@ class Pipe: public Connector
 		~Pipe();
 
 		Rshell * first;
-		Rsheel * second;
+		Rshell * second;
 		Rshell * parent;
 		string userInput;
 		bool status;
