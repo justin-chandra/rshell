@@ -9,6 +9,9 @@ using namespace std;
 #include "Or.h"
 #include "Command.h"
 #include "Always.h"
+#include "RedirectInput.h"
+#include "OutputRedirectA.h"
+#include "OutputRedirectO.h"
 
 #ifndef SHELL
 #define SHELL

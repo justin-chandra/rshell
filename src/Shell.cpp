@@ -162,8 +162,8 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 	string opening_paren = "(";
 	string pipe = "|";
 	string inputRedirect = "<";
-	string outputRedirectAppend = ">";
-	string outputRedirectOverwrite = ">>";
+	string outputRedirectAppend = ">>";
+	string outputRedirectOverwrite = ">";
 
 	stack<char *> temp_stack;	
 
@@ -257,7 +257,9 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			}
 			else if (temp == inputRedirect)
 			{
-				cout << "found <" << endl;
+				Rshell * inRedirect = new RedirectInput(temp_stack);
+				connectors.push_back(inRedirect);
+				empty_stack(temp_stack);
 			}
 			else if (temp == outputRedirectAppend)
 			{
