@@ -116,4 +116,7 @@ bool Command::evaluate()
 	return true;
 }
 
-
+vector<char *> Command::getVector()
+{
+	return this->v;
+}

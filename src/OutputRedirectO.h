@@ -2,6 +2,8 @@
 #include <stack>
 #include <string>
 #include <queue>
+#include <stdio.h>
+#include <vector>
 
 using namespace std;
 
@@ -24,6 +26,7 @@ class OutputRedirectO: public Connector
 		Rshell * parent;
 		string userInput;
 		bool status;
+		vector<char *> v;
 
 		bool evaluate();
 		

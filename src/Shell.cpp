@@ -99,7 +99,7 @@ void Shell::execute()
 					break;
 				}
 			}
-			
+
 			//inserts the ending characters
 			in.push(parsed);
 			if (semi_colon_exists)
@@ -109,7 +109,7 @@ void Shell::execute()
 				strcpy(semicolon_string, sc.c_str());
 				in.push(semicolon_string);
 			}
-			
+
 			if (insert_closing_paren)
 			{
 				string cp = ")";
@@ -190,7 +190,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			//print(q);
 			Rshell * set_of_parens = build_parens(q);
 			//attach the parens to connector
-			
+
 			if (!s.empty())
 			{
 				temp = s.top();
@@ -264,11 +264,18 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			}
 			else if (temp == outputRedirectAppend)
 			{
-				cout << "found >>" << endl;
+				/*
+				Rshell * outputRedirectO = new OutputRedirectO(temp_stack);
+				connectors.push_back(outputRedirectO);
+				empty_stack(temp_stack);
+				*/
 			}
 			else if (temp == outputRedirectOverwrite)
 			{
-				cout << "found >" << endl;
+				Rshell * outputRedirectO = new OutputRedirectO(temp_stack);
+				connectors.push_back(outputRedirectO);
+				empty_stack(temp_stack);
+
 			}
 			else if(temp == comment_string)
 			{

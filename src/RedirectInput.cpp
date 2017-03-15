@@ -28,6 +28,7 @@ bool RedirectInput::evaluate()
 	in = open(path, O_RDONLY);
 	cout << in << endl;
 	//dup2(in, 0);
+	//return second->evaluate(in, out);
 	return false;
 	//return second->evaluate();
 }

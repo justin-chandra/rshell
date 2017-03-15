@@ -45,6 +45,7 @@ bool Pipe::evaluate()
 	
 	//finish operations (read/write)
 	//close(in/out);
+	//close(in);
 	return false;
 }
 

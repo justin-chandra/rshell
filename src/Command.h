@@ -44,6 +44,7 @@ class Command: public Rshell
 		void setParent(Rshell *) {};
 		void setFirst(Rshell *) {};
 		void setSecond(Rshell *) {};
+		vector<char *> getVector();
 
 	private:
 };
