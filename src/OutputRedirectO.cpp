@@ -41,6 +41,7 @@ bool OutputRedirectO::evaluate()
 	//just for now
 	FILE * in;
 	char buff[512];
+	
 	if (!(in = popen(v.at(0), "w")))
 	{
 		perror("popen");
@@ -50,7 +51,7 @@ bool OutputRedirectO::evaluate()
 	{
 		cout << buff;
 	}
-
+	
 	pclose(in);
 	return false;	
 }

@@ -272,6 +272,10 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			}
 			else if (temp == outputRedirectOverwrite)
 			{
+				temp_stack.pop();
+				temp_stack.push(s.top());
+				s.pop();
+				//print(temp_stack);
 				Rshell * outputRedirectO = new OutputRedirectO(temp_stack);
 				connectors.push_back(outputRedirectO);
 				empty_stack(temp_stack);
