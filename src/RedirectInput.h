@@ -26,7 +26,8 @@ class RedirectInput: public Connector
 		RedirectInput(Rshell *);
 		RedirectInput(stack<char*>);
 		
-		bool evaluate();
+		bool evaluate(int in, int out);
+		void setFirst(Rshell *);
 		Rshell * getParent();
 };
 

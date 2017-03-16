@@ -23,6 +23,7 @@ OutputRedirectA::OutputRedirectA(stack<char *>s)
 {
 	Command * c = new Command(s);
 	this->second = c;
+	filePath = s.top();
 }
 
 OutputRedirectA::OutputRedirectA()
@@ -35,10 +36,10 @@ OutputRedirectA::~OutputRedirectA()
 
 }
 
-bool OutputRedirectA::evaluate()
+bool OutputRedirectA::evaluate(int in, int out)
 {
-	//just for now
-	return false;
+	out = open(filePath, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+	return first->evaluate(0, out);
 }
 
 Rshell * OutputRedirectA::getParent()

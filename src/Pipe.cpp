@@ -34,7 +34,7 @@ Pipe::~Pipe()
 
 }
 
-bool Pipe::evaluate()
+bool Pipe::evaluate(int in, int out)
 {
 	//change to have int in and int out parameters
 	//int in, out;
@@ -43,10 +43,26 @@ bool Pipe::evaluate()
 	   pipefd1[1] is the write end of the pipe
 	   */
 	
-	//finish operations (read/write)
-	//close(in/out);
-	//close(in);
-	return false;
+	int pipefd[2];
+	cout << "pipe eval" << endl;
+	if (pipe(pipefd) == -1)
+	{
+		perror("pipe");
+		_exit(1);
+	}
+
+	if (!first->evaluate(in, pipefd[1]))
+	{
+		return false;
+	}
+	close(pipefd[1]);
+
+	if (!second->evaluate(pipefd[0], out))
+	{
+		return false;
+	}
+	close(pipefd[0]);
+	return true;
 }
 
 Rshell * Pipe::getParent()

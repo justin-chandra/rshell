@@ -48,6 +48,18 @@ bool Or::evaluate()
 }
 */
 
+bool Or::evaluate(int in, int out)
+{
+	if (first->evaluate(in, out))
+	{
+		return second->evaluate(in, out);
+	}
+	else
+	{
+		return false;
+	}
+}
+
 bool Or::evaluate()
 {
 	if (first->evaluate())

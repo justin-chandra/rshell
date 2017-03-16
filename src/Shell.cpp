@@ -16,6 +16,7 @@ using namespace std;
 #include "Or.h"
 #include "Always.h"
 #include "Command.h"
+#include "Pipe.h"
 
 Shell::Shell()
 {
@@ -123,7 +124,7 @@ void Shell::execute()
 		Rshell * root = build_tree(connectors);
 		if (root != NULL)
 		{
-			root->evaluate();
+			root->evaluate(0, 1);
 		}
 		delete [] input_cstring;
 	}
@@ -253,28 +254,31 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			}
 			else if (temp == pipe)
 			{
-				cout << "found pipe" << endl;
+				temp_stack.pop();
+				print(temp_stack);
+				Rshell * pipe = new Pipe(temp_stack);
+				connectors.push_back(pipe);
+				//empty_stack(temp_stack);
 			}
 			else if (temp == inputRedirect)
 			{
-				print(temp_stack);
+				temp_stack.pop();
 				Rshell * inRedirect = new RedirectInput(temp_stack);
 				connectors.push_back(inRedirect);
+				s.push(temp_stack.top());
+				//print(temp_stack);
 				empty_stack(temp_stack);
 			}
 			else if (temp == outputRedirectAppend)
 			{
-				/*
-				Rshell * outputRedirectO = new OutputRedirectO(temp_stack);
-				connectors.push_back(outputRedirectO);
+				temp_stack.pop();
+				Rshell * outputRedirectA = new OutputRedirectA(temp_stack);
+				connectors.push_back(outputRedirectA);
 				empty_stack(temp_stack);
-				*/
 			}
 			else if (temp == outputRedirectOverwrite)
 			{
 				temp_stack.pop();
-				temp_stack.push(s.top());
-				s.pop();
 				//print(temp_stack);
 				Rshell * outputRedirectO = new OutputRedirectO(temp_stack);
 				connectors.push_back(outputRedirectO);
@@ -290,7 +294,6 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 
 	if (!temp_stack.empty())
 	{
-		//print(temp_stack);
 		if (connectors.empty())
 		{
 			Command * single_command = new Command(temp_stack);
@@ -303,7 +306,6 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			connectors.at(connectors.size() - 1)->setFirst(last_command);
 		}
 	}
-	//cout << "Size of connectors: " << connectors.size() << endl;
 	return connectors;
 }
 

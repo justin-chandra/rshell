@@ -23,6 +23,7 @@ class Or: public Connector
 		Or(stack<char *>s);
 		Or(Rshell *f, Rshell *s);
 		bool evaluate();
+		bool evaluate(int in, int out);
 
 		Rshell * getParent();
 

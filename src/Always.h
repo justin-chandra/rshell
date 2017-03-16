@@ -25,6 +25,7 @@ class Always: public Connector
 		Always(stack<char *> s);
 		~Always();
 		bool evaluate();
+		bool evaluate(int in, int out);
 
 		Rshell * getParent();
 

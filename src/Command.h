@@ -38,6 +38,7 @@ class Command: public Rshell
 		Command(stack<char *>s);
 		~Command();
 		bool evaluate();
+		bool evaluate(int in, int out);
 
 		Rshell * getParent() { return NULL; }
 		

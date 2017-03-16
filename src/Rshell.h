@@ -21,6 +21,7 @@ class Rshell
 	virtual void setSecond(Rshell *) = 0;
 
 	virtual bool evaluate() = 0;
+	virtual bool evaluate(int in, int out) = 0;
 };
 
 #endif

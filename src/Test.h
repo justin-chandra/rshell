@@ -52,7 +52,9 @@ class Test: public Rshell
 		vector<char *> v;
 
 		bool evaluate();
-		
+	
+		bool evaluate(int in, int out);	
+	
 		Rshell * getParent();
 		
 		void setParent(Rshell *);

@@ -24,6 +24,7 @@ OutputRedirectO::OutputRedirectO(stack<char *>s)
 	Command *c = new Command(s);
 	this->second = c;
 	this->v = c->getVector();
+	this->filePath = s.top();
 }
 
 OutputRedirectO::OutputRedirectO()
@@ -36,24 +37,10 @@ OutputRedirectO::~OutputRedirectO()
 
 }
 
-bool OutputRedirectO::evaluate()
+bool OutputRedirectO::evaluate(int in, int out)
 {
-	//just for now
-	FILE * in;
-	char buff[512];
-	
-	if (!(in = popen(v.at(0), "w")))
-	{
-		perror("popen");
-	}
-
-	while (fgets(buff, sizeof(buff), in) != NULL)
-	{
-		cout << buff;
-	}
-	
-	pclose(in);
-	return false;	
+	out = open(filePath, O_WRONLY | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+	return first->evaluate(0, out);
 }
 
 Rshell * OutputRedirectO::getParent()

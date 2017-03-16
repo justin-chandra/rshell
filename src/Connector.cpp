@@ -20,6 +20,11 @@ bool Connector::evaluate()
 	return false;
 }
 
+bool Connector::evaluate(int in, int out)
+{
+	return false;
+}
+
 //returns parent
 Rshell * Connector::getParent()
 {

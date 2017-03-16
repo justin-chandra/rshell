@@ -4,6 +4,9 @@
 #include <queue>
 #include <stdio.h>
 #include <vector>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -25,10 +28,11 @@ class OutputRedirectO: public Connector
 		Rshell * second;
 		Rshell * parent;
 		string userInput;
+		char * filePath;
 		bool status;
 		vector<char *> v;
 
-		bool evaluate();
+		bool evaluate(int in, int out);
 		
 		Rshell * getParent();
 		

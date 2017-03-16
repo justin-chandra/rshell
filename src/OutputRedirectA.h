@@ -2,6 +2,9 @@
 #include <stack>
 #include <string>
 #include <queue>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 using namespace std;
 
@@ -23,9 +26,10 @@ class OutputRedirectA: public Connector
 		Rshell * second;
 		Rshell * parent;
 		string userInput;
+		char * filePath;
 		bool status;
 
-		bool evaluate();
+		bool evaluate(int in, int out);
 		
 		Rshell * getParent();
 		

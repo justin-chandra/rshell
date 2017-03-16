@@ -67,6 +67,18 @@ bool And::evaluate()
 	}	
 }
 
+bool And::evaluate(int in, int out)
+{
+	if (first->evaluate(in, out))
+	{
+		return true;
+	}
+	else
+	{
+		return second->evaluate(in, out);
+	}	
+}
+
 //returns parent
 Rshell * And::getParent()
 {

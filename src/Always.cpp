@@ -35,6 +35,13 @@ bool Always::evaluate()
 	second->evaluate();
 	return true;
 }
+	
+bool Always::evaluate(int in, int out)
+{
+	first->evaluate(in, out);
+	second->evaluate(in, out);
+	return true;
+}
 
 Rshell * Always::getParent()
 {

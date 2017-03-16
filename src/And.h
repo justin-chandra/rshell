@@ -26,6 +26,7 @@ class And: public Connector
 		bool status;
 
 		bool evaluate();
+		bool evaluate(int in, int out);
 		
 		Rshell * getParent();
 

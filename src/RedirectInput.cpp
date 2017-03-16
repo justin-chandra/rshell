@@ -17,20 +17,18 @@ RedirectInput::RedirectInput(Rshell * second)
 
 RedirectInput::RedirectInput(stack<char*> s)
 {
-	
-	s.pop();
 	path = s.top();
 }
 
-bool RedirectInput::evaluate()
+bool RedirectInput::evaluate(int in, int out)
 {
-	int in = 0; //supposed to be parameter
-	in = open(path, O_RDONLY);
-	cout << in << endl;
-	//dup2(in, 0);
-	//return second->evaluate(in, out);
-	return false;
-	//return second->evaluate();
+	in = open(path, O_RDONLY | S_IRUSR);
+	return first->evaluate(in, 1);
+}
+
+void RedirectInput::setFirst(Rshell * r)
+{
+	this->first = r;
 }
 
 Rshell * RedirectInput::getParent()

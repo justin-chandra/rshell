@@ -28,7 +28,7 @@ class Pipe: public Connector
 		string userInput;
 		bool status;
 
-		bool evaluate();
+		bool evaluate(int in, int out);
 		
 		Rshell * getParent();
 		
