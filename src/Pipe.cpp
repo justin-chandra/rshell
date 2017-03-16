@@ -44,7 +44,6 @@ bool Pipe::evaluate(int in, int out)
 	   */
 	
 	int pipefd[2];
-	cout << "pipe eval" << endl;
 	if (pipe(pipefd) == -1)
 	{
 		perror("pipe");
