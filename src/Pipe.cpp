@@ -42,25 +42,24 @@ bool Pipe::evaluate(int in, int out)
 	   pipefd[0] is the read end of the pipe
 	   pipefd1[1] is the write end of the pipe
 	   */
-	
 	int pipefd[2];
 	if (pipe(pipefd) == -1)
 	{
 		perror("pipe");
 		_exit(1);
 	}
-
-	if (!first->evaluate(in, pipefd[1]))
+	if (first->evaluate(in, pipefd[1]))
 	{
 		return false;
 	}
 	close(pipefd[1]);
 
-	if (!second->evaluate(pipefd[0], out))
+	if (second->evaluate(pipefd[0], out))
 	{
 		return false;
 	}
 	close(pipefd[0]);
+
 	return true;
 }
 

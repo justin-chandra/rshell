@@ -255,7 +255,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			else if (temp == pipe)
 			{
 				temp_stack.pop();
-				print(temp_stack);
+				//print(temp_stack);
 				Rshell * pipe = new Pipe(temp_stack);
 				connectors.push_back(pipe);
 				//empty_stack(temp_stack);
@@ -263,6 +263,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 			else if (temp == inputRedirect)
 			{
 				temp_stack.pop();
+				//print(temp_stack);
 				Rshell * inRedirect = new RedirectInput(temp_stack);
 				connectors.push_back(inRedirect);
 				//s.push(temp_stack.top());

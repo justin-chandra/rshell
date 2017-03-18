@@ -22,8 +22,10 @@ RedirectInput::RedirectInput(stack<char*> s)
 
 bool RedirectInput::evaluate(int in, int out)
 {
-	in = open(path, O_RDONLY | S_IRUSR);
-	return first->evaluate(in, 1);
+	in = open(path, O_RDONLY);
+	//cout << "in < : " << in << endl;
+	//cout << "out < : " << out << endl;
+	return first->evaluate(in, out);
 }
 
 void RedirectInput::setFirst(Rshell * r)
