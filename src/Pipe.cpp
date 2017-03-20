@@ -50,13 +50,13 @@ bool Pipe::evaluate(int in, int out)
 	}
 	if (first->evaluate(in, pipefd[1]))
 	{
-		return false;
+		//return false;
 	}
 	close(pipefd[1]);
 
 	if (second->evaluate(pipefd[0], out))
 	{
-		return false;
+		//return false;
 	}
 	close(pipefd[0]);
 
