@@ -1,0 +1,8 @@
+ls > out
+cat out
+ls > out
+ls -l >> out
+cat out
+ls | tr a-z A-Z > out
+cat out
+exit

@@ -1,2 +1,1 @@
-cat < existingInputFile | tr a-z A-Z
-cat < existinginputFile
+hello world

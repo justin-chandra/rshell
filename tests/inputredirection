@@ -1,1 +1,4 @@
-cat < existingInputFile
+cat < existingInputFile  
+grep Justin < names  
+
+exit

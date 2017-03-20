@@ -1,6 +1,2 @@
--l | wc >> out
-cat < out
- 
-who >> out
-cat < out
-
+cat < existingInputFile | tr a-z A-Z
+cat < existinginputFile
