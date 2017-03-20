@@ -21,7 +21,10 @@ OutputRedirectO::OutputRedirectO(Rshell * r)
 
 OutputRedirectO::OutputRedirectO(stack<char *>s)
 {
-	this->filePath = s.top();
+	if (!s.empty())
+	{
+		this->filePath = s.top();
+	}
 }
 
 OutputRedirectO::OutputRedirectO()
@@ -37,8 +40,11 @@ OutputRedirectO::~OutputRedirectO()
 bool OutputRedirectO::evaluate(int in, int out)
 {
 	out = open(filePath, O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
-	//cout << "> out: " << out << endl;
-	return first->evaluate(0, out);
+	if (this->first)
+	{
+		return first->evaluate(0, out);
+	}
+	return false;
 }
 
 Rshell * OutputRedirectO::getParent()

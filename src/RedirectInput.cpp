@@ -17,7 +17,10 @@ RedirectInput::RedirectInput(Rshell * second)
 
 RedirectInput::RedirectInput(stack<char*> s)
 {
-	path = s.top();
+	if (!s.empty())
+	{
+		path = s.top();
+	}
 }
 
 bool RedirectInput::evaluate(int in, int out)

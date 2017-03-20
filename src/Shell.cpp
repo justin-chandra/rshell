@@ -266,7 +266,6 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 				//print(temp_stack);
 				Rshell * inRedirect = new RedirectInput(temp_stack);
 				connectors.push_back(inRedirect);
-				//s.push(temp_stack.top());
 				//print(temp_stack);
 				empty_stack(temp_stack);
 			}
