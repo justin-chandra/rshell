@@ -65,6 +65,18 @@ bool Test::evaluate(int in, int out)
 	struct stat sb;
 	char * c = NULL;
 
+	if (dup2(in, 0) == -1)
+	{
+		perror("dup2");
+		return false;
+	}	
+
+	if (dup2(out, 1) == -1)
+	{
+		perror("dup2 2");
+		return false;
+	}
+
 	//decides the flag
 	if (v.size() == 0)
 	{

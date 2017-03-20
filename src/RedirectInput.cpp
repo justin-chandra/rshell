@@ -26,8 +26,6 @@ RedirectInput::RedirectInput(stack<char*> s)
 bool RedirectInput::evaluate(int in, int out)
 {
 	in = open(path, O_RDONLY);
-	//cout << "in < : " << in << endl;
-	//cout << "out < : " << out << endl;
 	return first->evaluate(in, out);
 }
 

@@ -1,16 +1,3 @@
-#include <iostream>
-#include <string.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stack>
-#include <sys/wait.h>
-#include <vector>
-#include <stack>
-#include <queue>
-#include <stdlib.h>
-
-using namespace std;
-
 #include "Rshell.h"
 #include "Command.h"
 #include "Test.h"
@@ -92,14 +79,11 @@ bool Command::evaluate(int in, int out)
 		{
 			perror("dup2");
 			_exit(1);
-			//return false;
 		}
-		//cout << "a 1st dup2 t" << endl;
 		if (dup2(out, 1) == -1)
 		{
 			perror("dup2, 2");
 			_exit(1);
-			//return false;
 		}
 		char ** vloc = &v[0];
 		if (execvp(v.at(0), vloc) == -1)
