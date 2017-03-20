@@ -258,7 +258,7 @@ vector<Rshell*> Shell::build(stack<char *> & s)
 				//print(temp_stack);
 				Rshell * pipe = new Pipe(temp_stack);
 				connectors.push_back(pipe);
-				//empty_stack(temp_stack);
+				empty_stack(temp_stack);
 			}
 			else if (temp == inputRedirect)
 			{
