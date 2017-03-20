@@ -1,1 +1,2 @@
-hello kitty
+cat < existingInputFile | tr a-z A-Z
+cat < existinginputFile

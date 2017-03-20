@@ -1,1 +1,6 @@
-hello kitty
+-l | wc >> out
+cat < out
+ 
+who >> out
+cat < out
+
