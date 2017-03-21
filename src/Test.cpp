@@ -1,19 +1,4 @@
-#include <iostream>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <vector>
-#include <string>
-#include <pwd.h>
-#include <string.h>
-#include <errno.h>
-#include <stdlib.h>
-
 #include "Test.h"
-#include "Rshell.h"
-
-using namespace std;
 
 //we don't use this first constructor
 Test::Test(Rshell *f, Rshell *s)

@@ -1,0 +1,35 @@
+total 84
+-rw-r--r-- 1 jchan110 csgrads  827 Mar  3 17:48 commentedcommand
+-rwxr-xr-x 1 jchan110 csgrads   43 Feb 17 19:08 commented_command.sh
+-rw-r--r-- 1 jchan110 csgrads   12 Mar 20 11:33 existingInputFile
+-rw-r--r-- 1 jchan110 csgrads   12 Mar 20 21:58 existingOutputFile
+-rw-r--r-- 1 jchan110 csgrads 1583 Mar  3 17:48 exitcommand
+-rwxr-xr-x 1 jchan110 csgrads   38 Feb 18 23:48 exit.sh
+-rw-r--r-- 1 jchan110 csgrads   54 Mar 20 11:39 inputredirection
+-rwx--x--x 1 jchan110 csgrads   43 Mar 20 11:30 input_redirection.sh
+-rw-r--r-- 1 jchan110 csgrads  761 Feb 27 23:39 multicommand
+-rwxr-xr-x 1 jchan110 csgrads   39 Feb 17 19:08 multi_command.sh
+-rw-r--r-- 1 jchan110 csgrads  104 Mar 20 11:32 names
+-rw-r----- 1 jchan110 csgrads    0 Mar 20 21:58 out
+-rw-r--r-- 1 jchan110 csgrads   82 Mar 20 11:46 outputredirection
+-rwx--x--x 1 jchan110 csgrads   44 Mar 20 11:46 output_redirection.sh
+-rw-r--r-- 1 jchan110 csgrads  572 Mar 20 11:25 pipetest
+-rwx--x--x 1 jchan110 csgrads   35 Mar 19 23:33 pipe_test.sh
+-rw-r--r-- 1 jchan110 csgrads  188 Mar 14 12:30 precedencetest
+-rwxr-xr-x 1 jchan110 csgrads   41 Mar  3 17:48 precedence_test.sh
+-rw-r--r-- 1 jchan110 csgrads   77 Feb 17 19:08 singlecommands
+-rwxr-xr-x 1 jchan110 csgrads   41 Mar  3 17:34 single_command.sh
+-rw-r--r-- 1 jchan110 csgrads  891 Mar  3 17:48 testtest
+-rwxr-xr-x 1 jchan110 csgrads   35 Mar  3 17:48 test_test.sh
+     23     200    1389
+jonei005 pts/0        2017-03-20 11:45 (cpe-108-184-166-233.socal.res.rr.com)
+bdizo001 pts/1        2017-03-20 20:52 (96-40-181-65.dhcp.mtpk.ca.charter.com)
+evald011 pts/2        2017-03-20 19:01 (97-90-197-255.dhcp.losa.ca.charter.com)
+bcai006  pts/3        2017-03-16 23:52 (104.241.36.27)
+evald011 pts/4        2017-03-20 21:06 (97-90-197-255.dhcp.losa.ca.charter.com)
+bcai006  pts/5        2017-03-20 20:02 (104.241.36.27)
+evald011 pts/6        2017-03-20 20:44 (97-90-197-255.dhcp.losa.ca.charter.com)
+jchan110 pts/7        2017-03-20 21:38 (71-95-42-74.dhcp.rvsd.ca.charter.com)
+blong005 pts/9        2017-03-20 19:13 (96-40-181-65.dhcp.mtpk.ca.charter.com)
+evald011 pts/10       2017-03-20 20:15 (97-90-197-255.dhcp.losa.ca.charter.com)
+jchan110 pts/11       2017-03-20 21:47 (71-95-42-74.dhcp.rvsd.ca.charter.com)

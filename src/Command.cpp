@@ -100,7 +100,6 @@ bool Command::evaluate(int in, int out)
 			perror("wait failed");
 		}
 		while (!WIFEXITED(status) && !WIFSIGNALED(status))
-
 		{
 			if (waitpid(child_pid, &status, WUNTRACED) == 1)
 			{

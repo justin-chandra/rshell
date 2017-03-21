@@ -42,7 +42,7 @@ bool OutputRedirectO::evaluate(int in, int out)
 	out = open(filePath, O_WRONLY | O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
 	if (this->first)
 	{
-		return first->evaluate(0, out);
+		return first->evaluate(in, out);
 	}
 	return false;
 }

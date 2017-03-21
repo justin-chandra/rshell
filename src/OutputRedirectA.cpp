@@ -39,7 +39,7 @@ OutputRedirectA::~OutputRedirectA()
 bool OutputRedirectA::evaluate(int in, int out)
 {
 	out = open(filePath, O_WRONLY | O_APPEND | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
-	return first->evaluate(0, out);
+	return first->evaluate(in, out);
 }
 
 Rshell * OutputRedirectA::getParent()
